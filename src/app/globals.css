@@ -1,0 +1,151 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+  Joaquín Studio Salon — luxury salon theme.
+  Warm near-black canvas, champagne-gold accents, ivory text.
+  Colors authored in OKLCH for perceptual uniformity.
+*/
+
+:root {
+  --background: oklch(0.16 0.012 70);
+  --foreground: oklch(0.95 0.012 85);
+
+  --card: oklch(0.2 0.014 68);
+  --card-foreground: oklch(0.95 0.012 85);
+
+  --muted: oklch(0.27 0.012 70);
+  --muted-foreground: oklch(0.74 0.018 80);
+
+  --gold: oklch(0.8 0.13 82);
+  --gold-deep: oklch(0.66 0.13 70);
+  --gold-bright: oklch(0.9 0.09 92);
+
+  --border: oklch(0.32 0.02 75 / 0.5);
+  --ring: oklch(0.8 0.13 82);
+
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold-bright: var(--gold-bright);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-jost);
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: oklch(0.8 0.13 82 / 0.25);
+    color: var(--foreground);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--gold-deep);
+    border-radius: 999px;
+    border: 3px solid var(--background);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), ui-serif, Georgia, serif;
+  }
+
+  .text-gold-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--gold-deep) 0%,
+      var(--gold-bright) 45%,
+      var(--gold) 70%,
+      var(--gold-deep) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-gold-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--gold-deep) 0%,
+      var(--gold-bright) 50%,
+      var(--gold-deep) 100%
+    );
+  }
+
+  .border-gold {
+    border-color: var(--gold);
+  }
+
+  /* Soft radial glow used behind the hero content */
+  .radial-glow {
+    background: radial-gradient(
+      60% 60% at 50% 0%,
+      oklch(0.66 0.13 70 / 0.18) 0%,
+      transparent 70%
+    );
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
