@@ -31,6 +31,8 @@ export const salon = {
   },
   mapsQuery:
     "Camino Federal 8059, Campeche, El Pípila, 22206 Tijuana, B.C.",
+  googleMapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Joaquin+Studio+Salon+El+Pipila+Tijuana",
 } as const;
 
 export const whatsappBookingLink = (() => {
@@ -137,3 +139,18 @@ export const priceList: PriceCategory[] = [
     ],
   },
 ];
+
+export type Testimonial = {
+  name: string;
+  quote: string;
+  /** 1–5; defaults to 5 when omitted */
+  rating?: number;
+};
+
+/**
+ * Reseñas reales de clientes. Mantener solo testimonios verídicos
+ * (p. ej. copiados de Google). NO inventar reseñas.
+ * La sección muestra la calificación agregada aunque este arreglo esté vacío.
+ */
+export const testimonials: Testimonial[] = [];
+
