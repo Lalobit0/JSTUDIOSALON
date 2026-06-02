@@ -5,8 +5,13 @@ import { Menu, X, MessageCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/logo";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  TikTokIcon,
+} from "@/components/site/brand-icons";
 import { cn } from "@/lib/utils";
-import { whatsappBookingLink } from "@/lib/salon";
+import { salon, whatsappBookingLink } from "@/lib/salon";
 
 const links = [
   { href: "#servicios", label: "Servicios" },
@@ -77,7 +82,7 @@ export function Navbar() {
       <div
         className={cn(
           "overflow-hidden border-t border-border bg-background/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out md:hidden",
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
+          open ? "max-h-[34rem] opacity-100" : "max-h-0 opacity-0",
         )}
       >
         <div className="flex flex-col gap-1 px-5 py-4">
@@ -97,6 +102,39 @@ export function Navbar() {
               Agendar por WhatsApp
             </a>
           </Button>
+
+          <div className="mt-3 flex items-center justify-center gap-3 border-t border-border pt-4">
+            <span className="text-xs font-light tracking-wide text-muted-foreground">
+              Síguenos
+            </span>
+            <a
+              href={salon.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram de Joaquín Studio Salon"
+              className="flex size-10 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-gold/40 hover:text-gold"
+            >
+              <InstagramIcon className="size-5" />
+            </a>
+            <a
+              href={salon.social.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok de Joaquín Studio Salon"
+              className="flex size-10 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-gold/40 hover:text-gold"
+            >
+              <TikTokIcon className="size-5" />
+            </a>
+            <a
+              href={salon.social.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook de Joaquín Studio Salon"
+              className="flex size-10 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-gold/40 hover:text-gold"
+            >
+              <FacebookIcon className="size-5" />
+            </a>
+          </div>
         </div>
       </div>
     </header>
