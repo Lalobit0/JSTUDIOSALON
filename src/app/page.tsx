@@ -2,6 +2,7 @@ import { Navbar } from "@/components/site/navbar";
 import { Hero } from "@/components/site/hero";
 import { Services } from "@/components/site/services";
 import { Events } from "@/components/site/events";
+import { Gallery } from "@/components/site/gallery";
 import { Studio } from "@/components/site/studio";
 import { Testimonials } from "@/components/site/testimonials";
 import { Promos } from "@/components/site/promos";
@@ -80,6 +81,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Services />
+        <Gallery />
         <Events />
         <Studio />
         <Testimonials />

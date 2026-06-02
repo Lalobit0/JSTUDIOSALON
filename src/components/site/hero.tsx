@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Star, MessageCircle, MapPin, ArrowDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,17 @@ export function Hero() {
       id="inicio"
       className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 pt-28 pb-16 text-center sm:px-8"
     >
+      {/* Real work photo behind everything, heavily darkened for legibility */}
+      <Image
+        src="/hero.webp"
+        alt="Balayage con ondas realizado en Joaquín Studio Salon"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-top opacity-40"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,oklch(0.16_0.012_70/0.85),oklch(0.16_0.012_70/0.7)_45%,oklch(0.16_0.012_70/0.95))]" />
+
       {/* Ambient background layers */}
       <div className="pointer-events-none absolute inset-0 radial-glow" />
       <div

@@ -248,3 +248,26 @@ export const promos: Promo[] = [
   },
 ];
 
+
+/* ----------------------------------------------------------------------------
+ * Galería / portafolio (fotos reales del salón, optimizadas en /public)
+ * -------------------------------------------------------------------------- */
+
+export type GalleryItem = { src: string; alt: string };
+
+export const gallery: GalleryItem[] = [
+  { src: "/gallery/g01.webp", alt: "Rayitos y mechas en cabello largo" },
+  { src: "/gallery/g02.webp", alt: "Balayage en tonos caramelo sobre cabello castaño" },
+  { src: "/gallery/g03.webp", alt: "Alaciado profesional en cabello rubio" },
+  { src: "/gallery/g04.webp", alt: "Color plata con money piece" },
+  { src: "/gallery/g05.webp", alt: "Cabello rubio platinado laciado" },
+  { src: "/gallery/g06.webp", alt: "Mechas platinadas en cabello largo" },
+  { src: "/gallery/g07.webp", alt: "Balayage degradado en cabello castaño" },
+  { src: "/gallery/g08.webp", alt: "Color y alaciado en cabello castaño" },
+  { src: "/gallery/g09.webp", alt: "Balayage rubio con ondas" },
+  { src: "/gallery/g10.webp", alt: "Corte y ondas en cabello castaño" },
+  { src: "/gallery/g11.webp", alt: "Permanente con rizos definidos" },
+  { src: "/gallery/g12.webp", alt: "Balayage rubio con movimiento" },
+  { src: "/gallery/g13.webp", alt: "Maquillaje profesional para evento" },
+  { src: "/gallery/g14.webp", alt: "Peinado y maquillaje para evento" },
+];

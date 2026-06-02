@@ -1,8 +1,8 @@
+import Image from "next/image";
 import { BadgeCheck, Star, Sparkles, HeartHandshake } from "lucide-react";
 
 import { salon } from "@/lib/salon";
 import { Reveal } from "@/components/site/reveal";
-import { Logo } from "@/components/site/logo";
 
 const highlights = [
   {
@@ -28,20 +28,25 @@ export function Studio() {
       <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2">
         {/* Visual side */}
         <Reveal className="order-last lg:order-first">
-          <div className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-3xl border border-gold/20 bg-gradient-to-br from-card to-background">
-            <div className="pointer-events-none absolute inset-0 radial-glow" />
-            <div className="pointer-events-none absolute -right-16 -top-16 size-64 rounded-full bg-[radial-gradient(circle,oklch(0.66_0.13_70/0.3),transparent_60%)] blur-2xl" />
-            <div className="relative flex h-full flex-col items-center justify-center gap-8 p-10 text-center">
-              <Logo withText={false} className="[&_svg]:size-28" />
+          <div className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-3xl border border-gold/20">
+            <Image
+              src="/joaquin.webp"
+              alt="Joaquín Alonzo Gaytán, estilista certificado Pivot Point, peinando a una clienta en el salón"
+              fill
+              sizes="(max-width: 1024px) 100vw, 28rem"
+              className="object-cover"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-3 p-7 text-center">
               <div>
                 <p className="font-display text-3xl font-medium text-gold-gradient">
                   {salon.stylist}
                 </p>
-                <p className="mt-2 text-sm font-light tracking-[0.25em] text-muted-foreground uppercase">
+                <p className="mt-1 text-xs font-light tracking-[0.25em] text-foreground/80 uppercase">
                   {salon.title} · {salon.certification}
                 </p>
               </div>
-              <div className="flex items-center gap-3 rounded-full border border-gold/30 bg-background/50 px-5 py-2 backdrop-blur-sm">
+              <div className="flex items-center gap-2 rounded-full border border-gold/30 bg-background/60 px-4 py-1.5 backdrop-blur-sm">
                 <Star className="size-4 fill-gold text-gold" />
                 <span className="text-sm text-foreground">
                   {salon.rating} · {salon.reviews} reseñas
