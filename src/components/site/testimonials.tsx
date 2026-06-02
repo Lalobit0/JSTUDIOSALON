@@ -61,7 +61,7 @@ export function Testimonials() {
 
         {/* Individual testimonials (only renders when real reviews exist) */}
         {testimonials.length > 0 && (
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-2">
             {testimonials.map((t, i) => (
               <Reveal
                 key={t.name}

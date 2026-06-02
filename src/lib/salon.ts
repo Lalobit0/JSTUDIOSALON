@@ -153,11 +153,33 @@ export type Testimonial = {
 };
 
 /**
- * Reseñas reales de clientes. Mantener solo testimonios verídicos
- * (p. ej. copiados de Google). NO inventar reseñas.
- * La sección muestra la calificación agregada aunque este arreglo esté vacío.
+ * Reseñas reales de clientes (Google). Texto con limpieza mínima de
+ * ortografía/acentos, sin alterar palabras ni sentido. NO inventar reseñas.
+ * La sección también muestra la calificación agregada (4.6 · 34 reseñas).
  */
-export const testimonials: Testimonial[] = [];
+export const testimonials: Testimonial[] = [
+  {
+    name: "melani Laz",
+    quote:
+      "Muy buen estilista, súper bueno en tintes. Cuida demasiado a sus clientas y clientes. Lo recomiendo ampliamente, ¡Joaquín es el mejor!",
+    rating: 5,
+  },
+  {
+    name: "Frosty Orange",
+    quote: "Me encantó, muy amable y su trabajo muy profesional.",
+    rating: 5,
+  },
+  {
+    name: "Sánchez Ochoa",
+    quote: "El servicio excelente, son muy profesionales.",
+    rating: 5,
+  },
+  {
+    name: "Manuela Ramírez",
+    quote: "Trato excelente y muy profesional.",
+    rating: 5,
+  },
+];
 
 /* ----------------------------------------------------------------------------
  * Novias · XV Años · Eventos  (servicio de mayor margen)
