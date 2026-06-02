@@ -15,8 +15,8 @@ import { salon, whatsappBookingLink } from "@/lib/salon";
 
 const links = [
   { href: "#servicios", label: "Servicios" },
-  { href: "#estudio", label: "El Estudio" },
-  { href: "#resenas", label: "Reseñas" },
+  { href: "#novias", label: "Novias y Eventos" },
+  { href: "#promos", label: "Promociones" },
   { href: "#precios", label: "Precios" },
   { href: "#contacto", label: "Contacto" },
 ];

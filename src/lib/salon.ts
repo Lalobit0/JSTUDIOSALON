@@ -41,6 +41,11 @@ export const whatsappBookingLink = (() => {
   return `${salon.whatsapp.link}?text=${encodeURIComponent(message)}`;
 })();
 
+/** Build a WhatsApp link with a custom prefilled message. */
+export function whatsappLink(message: string) {
+  return `${salon.whatsapp.link}?text=${encodeURIComponent(message)}`;
+}
+
 export type Service = {
   title: string;
   description: string;
@@ -153,4 +158,71 @@ export type Testimonial = {
  * La sección muestra la calificación agregada aunque este arreglo esté vacío.
  */
 export const testimonials: Testimonial[] = [];
+
+/* ----------------------------------------------------------------------------
+ * Novias · XV Años · Eventos  (servicio de mayor margen)
+ * -------------------------------------------------------------------------- */
+
+export type EventService = {
+  title: string;
+  description: string;
+  icon: "crown" | "sparkles" | "camera";
+};
+
+export const eventServices: EventService[] = [
+  {
+    title: "Novias",
+    description:
+      "Maquillaje y peinado de novia con prueba previa. Look impecable que dura todo el día, en el salón o a domicilio.",
+    icon: "crown",
+  },
+  {
+    title: "XV Años",
+    description:
+      "El gran día de la quinceañera: maquillaje, peinado, alaciado y asesoría de imagen para que brille en cada foto.",
+    icon: "sparkles",
+  },
+  {
+    title: "Eventos y Graduaciones",
+    description:
+      "Bodas, graduaciones y sesiones de fotos. Peinado y maquillaje profesional para ti y tu grupo.",
+    icon: "camera",
+  },
+];
+
+/* ----------------------------------------------------------------------------
+ * Promociones
+ * IMPORTANTE: estos son compromisos del negocio. Joaquín debe confirmar/ajustar
+ * los porcentajes y condiciones antes de difundir. Edítalos aquí libremente.
+ * -------------------------------------------------------------------------- */
+
+export type Promo = {
+  badge: string;
+  title: string;
+  description: string;
+  cta: string;
+  /** mensaje que se pre-llena en WhatsApp al tocar el botón */
+  whatsappMessage: string;
+};
+
+export const promos: Promo[] = [
+  {
+    badge: "Clientes nuevos",
+    title: "15% en tu primera visita",
+    description:
+      "¿Es tu primera vez en Joaquín Studio Salon? Llévate un 15% de descuento en tu primer servicio.",
+    cta: "Quiero mi descuento",
+    whatsappMessage:
+      "¡Hola Joaquín! Soy cliente nueva/o y quiero aprovechar el 15% de descuento en mi primera visita. ¿Me ayudas a agendar?",
+  },
+  {
+    badge: "Referidos",
+    title: "Trae una amiga",
+    description:
+      "Recomienda el salón: tu amiga recibe 15% en su primer servicio y tú $150 de descuento en tu siguiente cita.",
+    cta: "Recomendar a una amiga",
+    whatsappMessage:
+      "¡Hola Joaquín! Quiero recomendar a una amiga para la promo de referidos. ¿Cómo funciona?",
+  },
+];
 

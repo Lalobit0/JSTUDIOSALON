@@ -1,8 +1,10 @@
 import { Navbar } from "@/components/site/navbar";
 import { Hero } from "@/components/site/hero";
 import { Services } from "@/components/site/services";
+import { Events } from "@/components/site/events";
 import { Studio } from "@/components/site/studio";
 import { Testimonials } from "@/components/site/testimonials";
+import { Promos } from "@/components/site/promos";
 import { Pricing } from "@/components/site/pricing";
 import { Contact } from "@/components/site/contact";
 import { Footer } from "@/components/site/footer";
@@ -78,8 +80,10 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Services />
+        <Events />
         <Studio />
         <Testimonials />
+        <Promos />
         <Pricing />
         <Contact />
       </main>
