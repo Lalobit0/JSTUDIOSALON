@@ -49,7 +49,11 @@ function JsonLd() {
       ratingValue: salon.rating,
       reviewCount: salon.reviews,
     },
-    sameAs: [salon.social.facebook, salon.social.instagram],
+    sameAs: [
+      salon.social.facebook,
+      salon.social.instagram,
+      salon.social.tiktok,
+    ],
     makesOffer: priceList.flatMap((c) =>
       c.items.map((i) => ({
         "@type": "Offer",

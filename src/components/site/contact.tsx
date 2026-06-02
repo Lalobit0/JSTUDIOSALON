@@ -4,7 +4,11 @@ import { salon, whatsappBookingLink } from "@/lib/salon";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
-import { FacebookIcon, InstagramIcon } from "@/components/site/brand-icons";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  TikTokIcon,
+} from "@/components/site/brand-icons";
 
 const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
   salon.mapsQuery,
@@ -88,8 +92,17 @@ export function Contact() {
               >
                 <InstagramIcon className="size-5" />
               </a>
+              <a
+                href={salon.social.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok de Joaquín Studio Salon"
+                className="flex size-11 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-gold/40 hover:text-gold"
+              >
+                <TikTokIcon className="size-5" />
+              </a>
               <span className="text-sm font-light text-muted-foreground">
-                @joaquinstudiosalon
+                {salon.social.instagramHandle}
               </span>
             </div>
 

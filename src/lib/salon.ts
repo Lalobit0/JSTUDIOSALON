@@ -24,8 +24,10 @@ export const salon = {
     link: "https://wa.me/526645369855",
   },
   social: {
-    facebook: "https://www.facebook.com/people/Joaquin-Studio-Salon",
-    instagram: "https://www.instagram.com/joaquinstudiosalon",
+    facebook: "https://www.facebook.com/HairStudioSalonn/",
+    instagram: "https://www.instagram.com/joaquin_studio_salon/",
+    tiktok: "https://www.tiktok.com/@joaquinalonzo895",
+    instagramHandle: "@joaquin_studio_salon",
   },
   mapsQuery:
     "Camino Federal 8059, Campeche, El Pípila, 22206 Tijuana, B.C.",

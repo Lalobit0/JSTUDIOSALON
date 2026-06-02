@@ -2,7 +2,11 @@ import { MapPin, Phone } from "lucide-react";
 
 import { salon } from "@/lib/salon";
 import { Logo } from "@/components/site/logo";
-import { FacebookIcon, InstagramIcon } from "@/components/site/brand-icons";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  TikTokIcon,
+} from "@/components/site/brand-icons";
 
 export function Footer() {
   return (
@@ -83,6 +87,15 @@ export function Footer() {
                   className="transition-colors hover:text-gold"
                 >
                   <InstagramIcon className="size-5" />
+                </a>
+                <a
+                  href={salon.social.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok"
+                  className="transition-colors hover:text-gold"
+                >
+                  <TikTokIcon className="size-5" />
                 </a>
               </li>
             </ul>

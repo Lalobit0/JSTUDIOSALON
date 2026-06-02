@@ -28,3 +28,11 @@ export function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function TikTokIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M16.5 3c.32 2.27 1.6 3.63 3.8 3.78v2.55c-1.28.12-2.4-.3-3.7-1.08v4.78c0 6.07-6.62 7.97-9.28 3.62-1.71-2.8-.66-7.72 4.84-7.92v2.69c-.42.07-.87.18-1.28.32-1.23.42-1.93 1.2-1.74 2.58.37 2.64 5.21 3.42 4.81-1.74V3.01h2.55Z" />
+    </svg>
+  );
+}
