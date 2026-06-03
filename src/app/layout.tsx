@@ -17,7 +17,7 @@ const jost = Jost({
   display: "swap",
 });
 
-const siteUrl = "https://joaquinstudiosalon.vercel.app";
+const siteUrl = "https://joaquinstudiosalon.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -19,8 +19,8 @@ function JsonLd() {
     "@context": "https://schema.org",
     "@type": "HairSalon",
     name: salon.name,
-    "@id": "https://joaquinstudiosalon.vercel.app",
-    url: "https://joaquinstudiosalon.vercel.app",
+    "@id": "https://joaquinstudiosalon.com",
+    url: "https://joaquinstudiosalon.com",
     telephone: salon.phone.tel,
     priceRange: "$$",
     address: {
