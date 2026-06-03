@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { salon } from "@/lib/salon";
+import { ConversionTracker } from "@/components/site/conversion-tracker";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -82,7 +84,11 @@ export default function RootLayout({
       lang="es-MX"
       className={`${cormorant.variable} ${jost.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        {children}
+        <ConversionTracker />
+        <Analytics />
+      </body>
     </html>
   );
 }
