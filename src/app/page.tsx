@@ -8,6 +8,7 @@ import { Brands } from "@/components/site/brands";
 import { Testimonials } from "@/components/site/testimonials";
 import { Promos } from "@/components/site/promos";
 import { Pricing } from "@/components/site/pricing";
+import { Faqs } from "@/components/site/faq";
 import { Contact } from "@/components/site/contact";
 import { Footer } from "@/components/site/footer";
 import { WhatsAppFloat } from "@/components/site/whatsapp-float";
@@ -97,6 +98,7 @@ export default function Home() {
         <Testimonials />
         <Promos />
         <Pricing />
+        <Faqs />
         <Contact />
       </main>
       <Footer />

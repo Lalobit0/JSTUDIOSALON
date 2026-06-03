@@ -292,3 +292,36 @@ export const brands: Brand[] = [
   { name: "Neurone" },
   { name: "Verenize" },
 ];
+
+/* ----------------------------------------------------------------------------
+ * Preguntas frecuentes
+ * -------------------------------------------------------------------------- */
+
+export type Faq = { q: string; a: string };
+
+export const faqs: Faq[] = [
+  {
+    q: "¿Necesito cita o atienden por orden de llegada?",
+    a: "Todo el trabajo es con cita previa para darte una atención personalizada y sin esperas. Agenda fácil por WhatsApp.",
+  },
+  {
+    q: "¿Atienden cabello largo?",
+    a: "¡Claro! Los precios de la lista son para cabello corto; el cabello largo o muy denso se cotiza en sitio durante tu valoración.",
+  },
+  {
+    q: "¿Hacen maquillaje y peinado para novias, XV años y eventos?",
+    a: "Sí. Ofrecemos maquillaje, peinado, alaciado y asesoría de imagen para novias, quinceañeras, graduaciones y eventos. Reserva tu fecha con anticipación.",
+  },
+  {
+    q: "¿Qué productos utilizan?",
+    a: "Trabajamos con marcas profesionales como Olaplex y Tec Italy para cuidar, proteger y dar el mejor acabado a tu cabello.",
+  },
+  {
+    q: "¿Cuánto cuesta mi servicio?",
+    a: "Puedes ver la lista de precios en esta página. Para servicios de color o cabello largo te damos una cotización exacta por WhatsApp, sin compromiso.",
+  },
+  {
+    q: "¿Dónde están ubicados?",
+    a: "En Camino Federal #8059, C. Campeche, El Pípila, Tijuana B.C. Encuentra el mapa en la sección de contacto.",
+  },
+];

@@ -138,12 +138,20 @@
     width: max-content;
     animation: marquee 50s linear infinite;
   }
+  .marquee-track-brands {
+    animation-duration: 32s;
+  }
   .marquee-viewport:hover .marquee-track {
     animation-play-state: paused;
   }
   @media (prefers-reduced-motion: reduce) {
     .marquee-track {
       animation: none;
+    }
+    /* Keep reviews reachable by swiping when motion is reduced */
+    .marquee-viewport {
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
     }
   }
 
