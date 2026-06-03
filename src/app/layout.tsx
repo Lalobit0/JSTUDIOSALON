@@ -47,12 +47,21 @@ export const metadata: Metadata = {
     title: `${salon.name} | Estilismo profesional en Tijuana`,
     description:
       "Color, cortes y tratamientos profesionales con técnica Pivot Point. Reserva tu cita en El Pípila, Tijuana.",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Joaquín Studio Salon",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${salon.name} | Estilismo profesional en Tijuana`,
     description:
       "Color, cortes y tratamientos profesionales con técnica Pivot Point en Tijuana.",
+    images: ["/og.jpg"],
   },
   alternates: { canonical: siteUrl },
 };
