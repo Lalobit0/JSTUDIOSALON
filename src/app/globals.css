@@ -136,7 +136,7 @@
   .marquee-track {
     display: flex;
     width: max-content;
-    animation: marquee 50s linear infinite;
+    animation: marquee 38s linear infinite;
   }
   .marquee-track-brands {
     animation-duration: 32s;
