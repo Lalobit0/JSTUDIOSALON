@@ -8,7 +8,7 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Agendar por WhatsApp"
-      className="group fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full bg-[#25D366] px-4 py-3 text-[#0b3d1f] shadow-[0_10px_40px_-10px_rgba(37,211,102,0.7)] transition-transform duration-200 ease-out hover:scale-105 active:scale-95"
+      className="group fixed bottom-5 right-5 z-50 flex size-14 items-center justify-center gap-3 rounded-full bg-[#25D366] text-[#0b3d1f] shadow-[0_6px_24px_-6px_rgba(37,211,102,0.55)] transition-transform duration-200 ease-out hover:scale-105 active:scale-95 sm:size-auto sm:px-5 sm:py-4"
     >
       <svg
         viewBox="0 0 24 24"
