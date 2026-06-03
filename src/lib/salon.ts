@@ -101,11 +101,11 @@ export const priceList: PriceCategory[] = [
   {
     title: "Color & Mechas",
     items: [
-      { name: "Cambio de look", price: "Desde $2,500" },
-      { name: "Corrección de color", price: "Desde $4,500" },
-      { name: "Balayage", price: "Desde $3,800" },
+      { name: "Cambio de look", price: "Por confirmar" },
+      { name: "Corrección de color", price: "Desde $2,500" },
+      { name: "Balayage", price: "Desde $4,500" },
       { name: "Rayitos", price: "Desde $3,800" },
-      { name: "Mechas universales", price: "Desde $2,500" },
+      { name: "Mechas universales", price: "Desde $3,800" },
       { name: "Babylights", price: "Desde $4,500" },
       { name: "Tintes", price: "Desde $1,800" },
       { name: "Permanente", price: "Desde $1,800" },
@@ -115,8 +115,9 @@ export const priceList: PriceCategory[] = [
     title: "Cortes & Estilo",
     items: [
       { name: "Corte de dama", price: "$700" },
-      { name: "Corte de caballero", price: "$250" },
-      { name: "Corte de niño / niña", price: "$200" },
+      { name: "Corte de caballero", price: "Desde $250" },
+      { name: "Corte de niño", price: "$200" },
+      { name: "Corte de niña", price: "$300", note: "No incluye alaciado" },
       { name: "Arreglo de barba", price: "$200" },
       { name: "Peinado con chongo", price: "Desde $1,300" },
       { name: "Peinado rizos", price: "$900" },
@@ -270,4 +271,19 @@ export const gallery: GalleryItem[] = [
   { src: "/gallery/g12.webp", alt: "Balayage rubio con movimiento" },
   { src: "/gallery/g13.webp", alt: "Maquillaje profesional para evento" },
   { src: "/gallery/g14.webp", alt: "Peinado y maquillaje para evento" },
+];
+
+/* ----------------------------------------------------------------------------
+ * Marcas / productos profesionales con los que se trabaja.
+ * `logo` es opcional: si se sube un PNG/SVG a /public/brands/ se muestra la
+ * imagen; si no, se muestra el nombre como wordmark.
+ * -------------------------------------------------------------------------- */
+
+export type Brand = { name: string; logo?: string };
+
+export const brands: Brand[] = [
+  { name: "Olaplex" },
+  { name: "Tec Italy" },
+  { name: "Neurone" },
+  { name: "Verenize" },
 ];

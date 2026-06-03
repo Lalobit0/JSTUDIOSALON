@@ -4,6 +4,7 @@ import { Services } from "@/components/site/services";
 import { Events } from "@/components/site/events";
 import { Gallery } from "@/components/site/gallery";
 import { Studio } from "@/components/site/studio";
+import { Brands } from "@/components/site/brands";
 import { Testimonials } from "@/components/site/testimonials";
 import { Promos } from "@/components/site/promos";
 import { Pricing } from "@/components/site/pricing";
@@ -84,6 +85,7 @@ export default function Home() {
         <Gallery />
         <Events />
         <Studio />
+        <Brands />
         <Testimonials />
         <Promos />
         <Pricing />
