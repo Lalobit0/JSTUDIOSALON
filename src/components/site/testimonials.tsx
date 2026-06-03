@@ -59,14 +59,17 @@ export function Testimonials() {
           </div>
         </Reveal>
 
-        {/* Individual testimonials (only renders when real reviews exist) */}
-        {testimonials.length > 0 && (
-          <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-2">
-            {testimonials.map((t, i) => (
-              <Reveal
-                key={t.name}
-                delay={(i % 3) * 90}
-                className="flex flex-col rounded-2xl border border-border bg-card/60 p-7 backdrop-blur-sm"
+      </div>
+
+      {/* Animated, full-bleed marquee of real reviews */}
+      {testimonials.length > 0 && (
+        <div className="marquee-viewport relative mt-14 w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_7%,black_93%,transparent)]">
+          <div className="marquee-track gap-5">
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <article
+                key={`${t.name}-${i}`}
+                aria-hidden={i >= testimonials.length}
+                className="flex w-[19rem] shrink-0 flex-col rounded-2xl border border-border bg-card/60 p-7 backdrop-blur-sm sm:w-[22rem]"
               >
                 <Quote className="size-6 text-gold/50" />
                 <p className="mt-4 flex-1 text-sm font-light leading-relaxed text-foreground/90">
@@ -78,11 +81,11 @@ export function Testimonials() {
                   </span>
                   <Stars value={t.rating ?? 5} />
                 </div>
-              </Reveal>
+              </article>
             ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }
