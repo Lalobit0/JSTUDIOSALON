@@ -33,22 +33,30 @@ function JsonLd() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 32.4845,
-      longitude: -116.9719,
+      latitude: salon.coordinates.lat,
+      longitude: salon.coordinates.lng,
     },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
-      opens: "10:00",
-      closes: "18:00",
-    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "10:00",
+        closes: "18:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Sunday",
+        opens: "11:00",
+        closes: "15:00",
+      },
+    ],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: salon.rating,

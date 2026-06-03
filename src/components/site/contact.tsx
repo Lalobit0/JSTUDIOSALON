@@ -10,9 +10,7 @@ import {
   TikTokIcon,
 } from "@/components/site/brand-icons";
 
-const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
-  salon.mapsQuery,
-)}&z=15&output=embed`;
+const mapSrc = `https://www.google.com/maps?q=${salon.coordinates.lat},${salon.coordinates.lng}&z=16&output=embed`;
 
 export function Contact() {
   return (
@@ -36,7 +34,12 @@ export function Contact() {
             </ContactRow>
 
             <ContactRow icon={Clock} label="Horario">
-              {salon.hours}
+              {salon.hours.weekdays}
+              <br />
+              {salon.hours.sunday}
+              <span className="mt-1 block text-sm font-light text-gold">
+                {salon.hours.note}
+              </span>
             </ContactRow>
 
             <div className="grid gap-4 sm:grid-cols-2">

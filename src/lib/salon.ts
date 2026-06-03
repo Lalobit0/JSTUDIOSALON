@@ -11,7 +11,11 @@ export const salon = {
   tagline: "Color, estilo y cuidado profesional del cabello en Tijuana.",
   rating: 4.6,
   reviews: 34,
-  hours: "Lun a Sáb · cierra a las 6:00 p.m.",
+  hours: {
+    weekdays: "Lunes a sábado: 10:00 a.m. – 6:00 p.m.",
+    sunday: "Domingo: 11:00 a.m. – 3:00 p.m.",
+    note: "Atención únicamente con cita previa.",
+  },
   address: {
     line1: "Camino Federal #8059, C. Campeche",
     line2: "El Pípila, 22206, Tijuana, B.C.",
@@ -29,10 +33,11 @@ export const salon = {
     tiktok: "https://www.tiktok.com/@joaquinalonzo895",
     instagramHandle: "@joaquin_studio_salon",
   },
+  // 32°29'31.2"N 116°52'30.0"W
+  coordinates: { lat: 32.492, lng: -116.875 },
   mapsQuery:
     "Camino Federal 8059, Campeche, El Pípila, 22206 Tijuana, B.C.",
-  googleMapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Joaquin+Studio+Salon+El+Pipila+Tijuana",
+  googleMapsUrl: "https://maps.app.goo.gl/kMdqwCBMybu1oQmm9",
 } as const;
 
 export const whatsappBookingLink = (() => {
