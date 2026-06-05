@@ -112,7 +112,7 @@ export const priceList: PriceCategory[] = [
       { name: "Rayitos", price: "Desde $3,800" },
       { name: "Mechas universales", price: "Desde $3,800" },
       { name: "Babylights", price: "Desde $4,500" },
-      { name: "Tintes", price: "Desde $1,800" },
+      { name: "Tintes", price: "Desde $2,500" },
       { name: "Permanente", price: "Desde $1,800" },
     ],
   },
