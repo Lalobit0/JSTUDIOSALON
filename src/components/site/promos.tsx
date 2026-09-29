@@ -18,8 +18,8 @@ export function Promos() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Promociones"
-          title="Más razones para visitarnos"
-          description="Beneficios para clientes nuevos y para quienes nos recomiendan."
+          title="Promociones vigentes"
+          description="Más razones para visitarnos: beneficios para clientes nuevos y para quienes nos recomiendan."
         />
 
         <div className="mt-16 grid gap-6 md:grid-cols-2">
@@ -39,7 +39,7 @@ export function Promos() {
                 <h3 className="relative mt-5 font-display text-3xl font-medium text-gold-gradient">
                   {promo.title}
                 </h3>
-                <p className="relative mt-3 flex-1 text-sm font-light leading-relaxed text-muted-foreground">
+                <p className="relative mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {promo.description}
                 </p>
                 <Button asChild className="relative mt-7 w-fit">
@@ -58,7 +58,7 @@ export function Promos() {
         </div>
 
         <Reveal className="mt-8">
-          <p className="text-center text-xs font-light text-muted-foreground">
+          <p className="text-center text-xs text-muted-foreground">
             Promociones no acumulables. Aplican condiciones; consulta los detalles
             al agendar.
           </p>

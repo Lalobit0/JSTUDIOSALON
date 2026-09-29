@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { Menu, X, MessageCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -12,14 +13,7 @@ import {
 } from "@/components/site/brand-icons";
 import { cn } from "@/lib/utils";
 import { salon, whatsappBookingLink } from "@/lib/salon";
-
-const links = [
-  { href: "#servicios", label: "Servicios" },
-  { href: "#galeria", label: "Galería" },
-  { href: "#novias", label: "Novias y Eventos" },
-  { href: "#promos", label: "Promociones" },
-  { href: "#contacto", label: "Contacto" },
-];
+import { navLinks } from "@/lib/nav";
 
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
@@ -42,24 +36,25 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-18 max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
-        <a href="#inicio" aria-label="Ir al inicio">
-          <Logo />
-        </a>
+        {/* Accessible name = the visible wordmark (WCAG 2.5.3). */}
+        <Link href="/">
+          <Logo priority />
+        </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
-          {links.map((l) => (
+        <div className="hidden items-center gap-6 lg:flex xl:gap-8">
+          {navLinks.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="group relative text-sm font-light tracking-wide text-foreground/80 transition-colors hover:text-gold"
+              className="group relative py-2.5 text-sm font-light tracking-wide text-foreground/80 transition-colors hover:text-gold"
             >
               {l.label}
-              <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gold-gradient transition-all duration-300 group-hover:w-full" />
+              <span className="absolute bottom-1 left-0 h-px w-0 bg-gold-gradient transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <Button asChild size="sm">
             <a href={whatsappBookingLink} target="_blank" rel="noopener noreferrer">
               <MessageCircle />
@@ -70,7 +65,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="flex size-10 items-center justify-center rounded-md text-gold transition-colors hover:bg-foreground/5 md:hidden"
+          className="flex size-11 items-center justify-center rounded-md text-gold transition-colors hover:bg-foreground/5 lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
@@ -82,12 +77,12 @@ export function Navbar() {
       {/* Mobile drawer */}
       <div
         className={cn(
-          "overflow-hidden border-t border-border bg-background/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out md:hidden",
+          "overflow-hidden border-t border-border bg-background/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out lg:hidden",
           open ? "max-h-[34rem] opacity-100" : "max-h-0 opacity-0",
         )}
       >
         <div className="flex flex-col gap-1 px-5 py-4">
-          {links.map((l) => (
+          {navLinks.map((l) => (
             <a
               key={l.href}
               href={l.href}

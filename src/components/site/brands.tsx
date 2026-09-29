@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 import { brands } from "@/lib/salon";
-import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
+import { Marquee } from "@/components/site/marquee";
 
 // Repeat enough times to fill wide screens, then duplicate the whole run so the
 // marquee loops seamlessly at -50%.
@@ -16,32 +16,36 @@ export function Brands() {
       <div className="mx-auto max-w-5xl px-5 text-center sm:px-8">
         <SectionHeading
           eyebrow="Calidad profesional"
-          title="Trabajamos con marcas premium"
+          title="Marcas profesionales que usamos en cada servicio"
           description="Productos profesionales para cuidar, reparar y proteger tu cabello en cada servicio."
         />
       </div>
 
-      <Reveal className="marquee-viewport relative mt-12 w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-        <div className="marquee-track marquee-track-brands items-center">
-          {[...run, ...run].map((brand, i) => (
-            <div key={`${brand.name}-${i}`} className="group shrink-0 px-8 sm:px-12">
-              {brand.logo ? (
-                <Image
-                  src={brand.logo}
-                  alt={`Logo de ${brand.name}`}
-                  width={150}
-                  height={56}
-                  className="h-10 w-auto object-contain opacity-60 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
-                />
-              ) : (
-                <span className="font-display text-2xl font-medium tracking-[0.12em] text-foreground/55 uppercase transition-colors duration-300 group-hover:text-gold sm:text-3xl">
-                  {brand.name}
-                </span>
-              )}
-            </div>
-          ))}
-        </div>
-      </Reveal>
+      <Marquee label="marcas" className="mt-12" trackClassName="marquee-track-brands items-center">
+        {[...run, ...run].map((brand, i) => (
+          // Only the first run is exposed to assistive tech; the rest are
+          // visual repeats for the loop.
+          <div
+            key={`${brand.name}-${i}`}
+            aria-hidden={i >= brands.length}
+            className="group shrink-0 px-8 sm:px-12"
+          >
+            {brand.logo ? (
+              <Image
+                src={brand.logo}
+                alt={`Logo de ${brand.name}`}
+                width={150}
+                height={56}
+                className="h-10 w-auto object-contain opacity-60 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+              />
+            ) : (
+              <span className="font-display text-2xl font-medium tracking-[0.12em] text-foreground/55 uppercase transition-colors duration-300 group-hover:text-gold sm:text-3xl">
+                {brand.name}
+              </span>
+            )}
+          </div>
+        ))}
+      </Marquee>
     </section>
   );
 }

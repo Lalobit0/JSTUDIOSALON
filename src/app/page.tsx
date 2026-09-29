@@ -12,23 +12,46 @@ import { Faqs } from "@/components/site/faq";
 import { Contact } from "@/components/site/contact";
 import { Footer } from "@/components/site/footer";
 import { WhatsAppFloat } from "@/components/site/whatsapp-float";
-import { salon, priceList } from "@/lib/salon";
+import { salon, priceList, siteUrl } from "@/lib/salon";
+import { JsonLd, pageMetadata, salonId } from "@/lib/seo";
 
-/** Structured data so Google can render a rich local-business result. */
-function JsonLd() {
-  const data = {
+export const metadata = pageMetadata({
+  title: "Salón de Belleza en Tijuana: Balayage y Color | Joaquín Studio",
+  description:
+    "Balayage, corrección de color, cortes y keratina en El Pípila, Tijuana. Maquillaje para novias y XV. Precios desde $200. Agenda tu cita por WhatsApp.",
+  path: "/",
+});
+
+/*
+ * Structured data for the business. No aggregateRating: Google ignores
+ * ratings a business publishes about itself, and a hand-written value can
+ * drift from the real Google profile.
+ */
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
+    url: `${siteUrl}/`,
+    name: salon.name,
+    inLanguage: "es-MX",
+    publisher: { "@id": salonId },
+  },
+  {
     "@context": "https://schema.org",
     "@type": "HairSalon",
+    "@id": salonId,
     name: salon.name,
-    "@id": "https://joaquinstudiosalon.com",
-    url: "https://joaquinstudiosalon.com",
+    url: `${siteUrl}/`,
+    logo: `${siteUrl}/logo.png`,
+    image: [`${siteUrl}/og.jpg`, `${siteUrl}/joaquin.webp`],
     telephone: salon.phone.tel,
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
-      streetAddress: salon.address.line1,
+      streetAddress: `${salon.address.line1}, El Pípila`,
       addressLocality: "Tijuana",
-      addressRegion: "B.C.",
+      addressRegion: "Baja California",
       postalCode: "22206",
       addressCountry: "MX",
     },
@@ -37,6 +60,7 @@ function JsonLd() {
       latitude: salon.coordinates.lat,
       longitude: salon.coordinates.lng,
     },
+    hasMap: salon.googleMapsUrl,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -58,11 +82,6 @@ function JsonLd() {
         closes: "15:00",
       },
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: salon.rating,
-      reviewCount: salon.reviews,
-    },
     sameAs: [
       salon.social.facebook,
       salon.social.instagram,
@@ -74,30 +93,24 @@ function JsonLd() {
         itemOffered: { "@type": "Service", name: i.name },
       })),
     ),
-  };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
-}
+  },
+];
 
 export default function Home() {
   return (
     <>
-      <JsonLd />
+      <JsonLd data={structuredData} />
       <Navbar />
       <main className="flex-1">
         <Hero />
         <Services />
         <Gallery />
+        <Testimonials />
         <Events />
+        <Pricing />
+        <Promos />
         <Studio />
         <Brands />
-        <Testimonials />
-        <Promos />
-        <Pricing />
         <Faqs />
         <Contact />
       </main>

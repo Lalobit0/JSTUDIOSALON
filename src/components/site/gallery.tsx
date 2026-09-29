@@ -13,14 +13,14 @@ export function Gallery() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Portafolio"
-          title="Nuestro trabajo habla por sí solo"
-          description="Color, balayage, rayitos, alaciado, rizos y maquillaje hechos en el salón. Toca una foto para verla en grande."
+          title="Galería: balayage, color y peinados hechos en el salón"
+          description="Nuestro trabajo habla por sí solo: fotos reales de clientas. Toca una foto para verla en grande."
         />
 
         <GalleryGrid items={gallery} />
 
         <Reveal className="mt-12 flex flex-col items-center gap-4 text-center">
-          <p className="text-sm font-light text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             Mira más transformaciones en nuestro Instagram.
           </p>
           <Button asChild variant="outline" size="lg">

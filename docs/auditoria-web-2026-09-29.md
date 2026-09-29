@@ -1324,3 +1324,64 @@ Orden por: impacto en leads → riesgo → impacto en Ads → impacto SEO → UX
 | Imagen Open Graph | ✅ (mejorable) | P3-7 |
 
 **Declaración final:** todo lo marcado como ✅/❌/⚠️ se comprobó en el código de producción, en respuestas HTTP de producción obtenidas mediante el conector de Vercel o en el build local del mismo commit. Las métricas de rendimiento son de laboratorio. Lo que depende de cuentas de Google, WhatsApp Business, DNS o decisiones del negocio está marcado ❓ con su método de verificación. No se detectó ni se asume ningún CRM, automatización comercial, chatbot, píxel publicitario ni sistema de newsletter.
+
+---
+
+## X. Estado de implementación (29 de septiembre de 2026)
+
+Decisiones del negocio tomadas para esta ronda: promociones **confirmadas** (se mantienen); aviso de privacidad **aprobado** para publicarse (pendiente de revisión legal); GTM **listo pero inactivo** hasta tener ID; landings de **Novias/XV** y **Balayage/Color** aprobadas usando solo fotos, textos y precios existentes.
+
+### Implementado en el código
+
+| Hallazgo | Cambio |
+|---|---|
+| P0-1 Medición | GTM vía `@next/third-parties` con Consent Mode v2 (todo `denied` por defecto), banner Aceptar/Rechazar/Configurar, "Preferencias de cookies" en el footer y eventos `click_whatsapp`, `click_phone`, `click_directions`, `click_reviews`, `click_social`, `view_pricing`, `faq_open`, `gallery_open`. Se activa con `NEXT_PUBLIC_GTM_ID` |
+| P0-2 Promociones | Nota de "pendiente de confirmar" reemplazada: promociones confirmadas por el negocio |
+| P1-1 Title/description/H1/hero | Title 62 car., description 149 car., H1 "Balayage, color y cortes profesionales en Tijuana", hero con precio desde $200 y "Ver precios"; H2 descriptivos en todas las secciones; meta keywords eliminada |
+| P1-2 LCP | Hero con `quality={50}` y tope de 828 px (`images.qualities`), favicon 156 KB → 12.6 KB + `favicon.ico`, logo servido a 48/96 px, `priority` solo en el logo del header, un solo `IntersectionObserver` compartido, fuentes Cormorant reducidas a 2 pesos |
+| P1-6 Privacidad | `/aviso-de-privacidad` con datos reales del sitio, enlazada en footer y banner |
+| P1-7 Calificación | Estrellas parciales (4.6 ya no se dibuja como 5), `aggregateRating` eliminado del JSON-LD, nota de revisión mensual en `salon.ts` |
+| P1-8 Calidad del lead | Mensajes de WhatsApp estructurados: cita (servicio, día/horario), evento (tipo, fecha, personas, lugar) y color (servicio, largo) |
+| P1-9 Landings | `/novias-y-xv-anos` y `/balayage-y-color` con H1, precios, fotos, FAQ, CTA propios, `BreadcrumbList` y `Service`; enlazadas desde menú, servicios, novias, precios y footer |
+| P2-1 404 | `not-found.tsx` con menú, CTA y footer; un solo `<title>`, sin canonical, `noindex` |
+| P2-2 Seguridad | `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, `Permissions-Policy`, CSP (`frame-ancestors`, `base-uri`, `object-src`, `form-action`), `poweredByHeader: false` |
+| P2-3 Sin JS | `@media (scripting: none)` muestra todo el contenido |
+| P2-5/6 Navegación | Menú: Servicios · Precios · Novias y XV · Galería · Promociones · Contacto (enlaces `/#…` que funcionan desde las landings); menú completo desde 1024 px |
+| P2-7 Touch targets | Footer, iconos sociales, flecha del hero y hamburguesa a 44 px |
+| P2-8 Carruseles | Botón Pausar/Reanudar, pausa con foco de teclado; duplicados ocultos a lectores de pantalla |
+| P2-9 "Por confirmar" | Cambiado a "Cotización" |
+| P2-10 Tipografía | Cuerpo de texto a peso 400 |
+| P2-11/12, P3-11 Accesibilidad | Nombre del enlace del logo = texto visible; `alt=""` en logo y hero decorativos; lightbox con foco al abrir, trampa de Tab y retorno de foco; botón flotante dentro de `<aside>` con etiqueta que incluye el texto visible |
+| P2-13 Mapa | Botón "Cómo llegar" al perfil de Google (el iframe sigue por coordenadas: el código de inserción del perfil debe copiarse desde Google Maps) |
+| P2-15, P3-8 Schema | `WebSite` + `HairSalon` con `@id` de entidad, `logo`, `image`, `hasMap`, `addressRegion: "Baja California"` |
+| Orden de secciones | Reseñas tras Galería; Precios antes de Promociones y Estudio |
+| P3-2 Sitemap | 4 URLs con fechas reales de contenido |
+| P3-3 llms.txt | `/llms.txt` generado desde `salon.ts` (siempre sincronizado) |
+| P3-6 Nombres de imágenes | Galería renombrada con nombres descriptivos. Re-comprimir las fuentes solo ahorraba ~6 % con pérdida adicional, así que se conservaron |
+
+### Resultado medido (mismo método de laboratorio que la auditoría)
+
+| Página | Rendimiento móvil | LCP | TBT | CLS | Accesibilidad | SEO |
+|---|---|---|---|---|---|---|
+| `/` antes | 78 | 4.5 s | 300 ms | 0 | 100 | 100 |
+| `/` después | 94–98 | 2.4–2.9 s | 80–120 ms | 0 | 100 | 100 |
+| `/novias-y-xv-anos` | 98 | 2.2–2.3 s | 70 ms | 0 | 100 | 100 |
+| `/balayage-y-color` | 91–94 | 3.0–3.5 s | 40–100 ms | 0 | 100 | 100 |
+
+Playwright a 320, 360, 375, 390, 414, 768, 1024 y 1280 px en las 5 plantillas: sin overflow horizontal, un solo H1, primer CTA de WhatsApp sobre el pliegue, sin objetivos táctiles < 24 px y **0 violaciones de axe** (WCAG 2.2 AA + buenas prácticas).
+
+### Pendiente (requiere cuentas, datos o decisiones del negocio)
+
+| Tarea | Responsable | Referencia |
+|---|---|---|
+| Crear contenedor GTM y propiedad GA4; poner `NEXT_PUBLIC_GTM_ID` en Vercel y redesplegar; configurar etiquetas y marcar `click_whatsapp`/`click_phone` como eventos clave | Agencia / Marketing | P0-1, sección M |
+| Conversiones de Google Ads (importadas de GA4 **o** nativas, no ambas) | Agencia | Sección N |
+| Revisión legal del Aviso de privacidad | Dirección + asesor legal | P1-6 |
+| DNS de `www` (si el dominio no usa los nameservers de Vercel) | Dueño del dominio | P1-3 |
+| Search Console: propiedad de dominio, enviar sitemap (ahora con 4 URLs), solicitar indexación de las páginas nuevas | Especialista SEO | P1-4 |
+| Perfil de Negocio: NAP, horario, sitio web, teléfono principal | Dirección | P1-5 |
+| Confirmar mensualmente la calificación de Google | Dirección | P1-7 |
+| Fotos reales de novias y XV años; años de experiencia; certificado Pivot Point | Dirección | P2-14 |
+| Respuestas para el FAQ ampliado (pagos, anticipo, domicilio, estacionamiento, cancelación) | Dirección | P2-17 |
+| Código "Insertar un mapa" del perfil de Google para reemplazar el iframe por coordenadas | Dirección | P2-13 |
+| Nueva imagen Open Graph con foto real | Diseñador | P3-7 |

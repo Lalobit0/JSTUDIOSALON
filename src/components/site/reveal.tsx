@@ -3,9 +3,37 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+/*
+ * One IntersectionObserver shared by every <Reveal> on the page instead of one
+ * per instance (there are ~50), to keep main-thread work low on phones.
+ */
+const callbacks = new WeakMap<Element, () => void>();
+let sharedObserver: IntersectionObserver | null = null;
+
+function observe(el: Element, onVisible: () => void) {
+  sharedObserver ??= new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        callbacks.get(entry.target)?.();
+        callbacks.delete(entry.target);
+        sharedObserver?.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+  );
+  callbacks.set(el, onVisible);
+  sharedObserver.observe(el);
+  return () => {
+    callbacks.delete(el);
+    sharedObserver?.unobserve(el);
+  };
+}
+
 /**
  * Reveals children with a gentle upward fade as they enter the viewport.
- * Respects prefers-reduced-motion via the .reveal CSS rules.
+ * Respects prefers-reduced-motion and stays visible without JavaScript via the
+ * .reveal CSS rules.
  */
 export function Reveal({
   children,
@@ -24,17 +52,7 @@ export function Reveal({
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    return observe(el, () => setVisible(true));
   }, []);
 
   return (
