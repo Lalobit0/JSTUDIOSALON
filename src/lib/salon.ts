@@ -3,12 +3,18 @@
  * Transcribed from the salon's price board and business card.
  */
 
+export const siteUrl = "https://joaquinstudiosalon.com";
+
 export const salon = {
   name: "Joaquín Studio Salon",
   stylist: "Joaquín Alonzo Gaytán",
   title: "Estilista Certificado",
   certification: "Pivot Point",
   tagline: "Color, estilo y cuidado profesional del cabello en Tijuana.",
+  /**
+   * Calificación del perfil de Google. Se escribe a mano: revisarla una vez al
+   * mes contra el perfil y actualizar ambos números.
+   */
   rating: 4.6,
   reviews: 34,
   hours: {
@@ -40,22 +46,50 @@ export const salon = {
   googleMapsUrl: "https://maps.app.goo.gl/kMdqwCBMybu1oQmm9",
 } as const;
 
-export const whatsappBookingLink = (() => {
-  const message =
-    "¡Hola Joaquín! Me gustaría agendar una cita en Joaquín Studio Salon. ¿Qué disponibilidad tienen?";
-  return `${salon.whatsapp.link}?text=${encodeURIComponent(message)}`;
-})();
-
 /** Build a WhatsApp link with a custom prefilled message. */
 export function whatsappLink(message: string) {
   return `${salon.whatsapp.link}?text=${encodeURIComponent(message)}`;
 }
+
+/*
+ * Mensajes precargados. Piden desde el primer mensaje los datos que hacen
+ * falta para agendar o cotizar, sin agregar un formulario.
+ */
+export const whatsappBookingLink = whatsappLink(
+  [
+    "¡Hola Joaquín! Vi su página y me gustaría agendar una cita en Joaquín Studio Salon.",
+    "• Servicio: ",
+    "• Día y horario que me acomoda: ",
+  ].join("\n"),
+);
+
+export const whatsappEventLink = whatsappLink(
+  [
+    "¡Hola Joaquín! Quiero cotizar maquillaje y peinado para un evento.",
+    "• Tipo de evento (novia / XV años / graduación / otro): ",
+    "• Fecha: ",
+    "• Número de personas: ",
+    "• Lugar (en el salón / a domicilio en…): ",
+    "¿Tienes disponibilidad?",
+  ].join("\n"),
+);
+
+export const whatsappColorLink = whatsappLink(
+  [
+    "¡Hola Joaquín! Quiero cotizar un servicio de color.",
+    "• Servicio (balayage / babylights / rayitos / corrección de color / tinte): ",
+    "• Largo de mi cabello (corto / medio / largo): ",
+    "¿Qué disponibilidad tienen?",
+  ].join("\n"),
+);
 
 export type Service = {
   title: string;
   description: string;
   /** lucide icon name resolved in the component */
   icon: "sparkles" | "palette" | "scissors" | "droplets" | "brush" | "crown";
+  /** Dedicated page for the service, when one exists */
+  href?: string;
 };
 
 export const featuredServices: Service[] = [
@@ -64,12 +98,14 @@ export const featuredServices: Service[] = [
     description:
       "Balayage, rayitos, mechas universales y babylights con técnicas Pivot Point para un color luminoso y natural.",
     icon: "palette",
+    href: "/balayage-y-color",
   },
   {
     title: "Corrección de Color",
     description:
       "Rescatamos colores no deseados y unificamos tonos sin maltratar tu cabello.",
     icon: "sparkles",
+    href: "/balayage-y-color",
   },
   {
     title: "Cortes & Peinados",
@@ -88,6 +124,7 @@ export const featuredServices: Service[] = [
     description:
       "Maquillaje profesional y peinado para bodas, XV años y ocasiones especiales.",
     icon: "brush",
+    href: "/novias-y-xv-anos",
   },
   {
     title: "Cambio de Look",
@@ -106,7 +143,7 @@ export const priceList: PriceCategory[] = [
   {
     title: "Color & Mechas",
     items: [
-      { name: "Cambio de look", price: "Por confirmar" },
+      { name: "Cambio de look", price: "Cotización" },
       { name: "Corrección de color", price: "Desde $2,500" },
       { name: "Balayage", price: "Desde $4,500" },
       { name: "Rayitos", price: "Desde $3,800" },
@@ -219,9 +256,8 @@ export const eventServices: EventService[] = [
 ];
 
 /* ----------------------------------------------------------------------------
- * Promociones
- * IMPORTANTE: estos son compromisos del negocio. Joaquín debe confirmar/ajustar
- * los porcentajes y condiciones antes de difundir. Edítalos aquí libremente.
+ * Promociones (confirmadas por el negocio). Son compromisos públicos: cualquier
+ * cambio de porcentaje o condiciones debe aprobarlo Joaquín antes de publicarse.
  * -------------------------------------------------------------------------- */
 
 export type Promo = {
@@ -262,20 +298,20 @@ export const promos: Promo[] = [
 export type GalleryItem = { src: string; alt: string };
 
 export const gallery: GalleryItem[] = [
-  { src: "/gallery/g01.webp", alt: "Rayitos y mechas en cabello largo" },
-  { src: "/gallery/g02.webp", alt: "Balayage en tonos caramelo sobre cabello castaño" },
-  { src: "/gallery/g03.webp", alt: "Alaciado profesional en cabello rubio" },
-  { src: "/gallery/g04.webp", alt: "Color plata con money piece" },
-  { src: "/gallery/g05.webp", alt: "Cabello rubio platinado laciado" },
-  { src: "/gallery/g06.webp", alt: "Mechas platinadas en cabello largo" },
-  { src: "/gallery/g07.webp", alt: "Balayage degradado en cabello castaño" },
-  { src: "/gallery/g08.webp", alt: "Color y alaciado en cabello castaño" },
-  { src: "/gallery/g09.webp", alt: "Balayage rubio con ondas" },
-  { src: "/gallery/g10.webp", alt: "Corte y ondas en cabello castaño" },
-  { src: "/gallery/g11.webp", alt: "Permanente con rizos definidos" },
-  { src: "/gallery/g12.webp", alt: "Balayage rubio con movimiento" },
-  { src: "/gallery/g13.webp", alt: "Maquillaje profesional para evento" },
-  { src: "/gallery/g14.webp", alt: "Peinado y maquillaje para evento" },
+  { src: "/gallery/rayitos-mechas-cabello-largo.webp", alt: "Rayitos y mechas en cabello largo" },
+  { src: "/gallery/balayage-caramelo-cabello-castano.webp", alt: "Balayage en tonos caramelo sobre cabello castaño" },
+  { src: "/gallery/alaciado-cabello-rubio.webp", alt: "Alaciado profesional en cabello rubio" },
+  { src: "/gallery/color-plata-money-piece.webp", alt: "Color plata con money piece" },
+  { src: "/gallery/rubio-platinado-laciado.webp", alt: "Cabello rubio platinado laciado" },
+  { src: "/gallery/mechas-platinadas-cabello-largo.webp", alt: "Mechas platinadas en cabello largo" },
+  { src: "/gallery/balayage-degradado-castano.webp", alt: "Balayage degradado en cabello castaño" },
+  { src: "/gallery/color-alaciado-castano.webp", alt: "Color y alaciado en cabello castaño" },
+  { src: "/gallery/balayage-rubio-ondas.webp", alt: "Balayage rubio con ondas" },
+  { src: "/gallery/corte-ondas-castano.webp", alt: "Corte y ondas en cabello castaño" },
+  { src: "/gallery/permanente-rizos-definidos.webp", alt: "Permanente con rizos definidos" },
+  { src: "/gallery/balayage-rubio-movimiento.webp", alt: "Balayage rubio con movimiento" },
+  { src: "/gallery/maquillaje-profesional-evento.webp", alt: "Maquillaje profesional para evento" },
+  { src: "/gallery/peinado-maquillaje-evento.webp", alt: "Peinado y maquillaje para evento" },
 ];
 
 /* ----------------------------------------------------------------------------
@@ -325,3 +361,25 @@ export const faqs: Faq[] = [
     a: "En Camino Federal #8059, C. Campeche, El Pípila, Tijuana B.C. Encuentra el mapa en la sección de contacto.",
   },
 ];
+
+/* ----------------------------------------------------------------------------
+ * Helpers for the service pages: they reuse the same prices, photos and FAQ
+ * as the home page, looked up by name so everything stays in sync.
+ * -------------------------------------------------------------------------- */
+
+function pick<T>(all: readonly T[], keys: readonly string[], match: (item: T, key: string) => boolean): T[] {
+  return keys.map((key) => {
+    const found = all.find((item) => match(item, key));
+    if (!found) throw new Error(`salon.ts: "${key}" no existe`);
+    return found;
+  });
+}
+
+export const pricesFor = (names: readonly string[]) =>
+  pick(priceList.flatMap((c) => c.items), names, (i, n) => i.name === n);
+
+export const galleryFor = (files: readonly string[]) =>
+  pick(gallery, files, (g, f) => g.src === `/gallery/${f}.webp`);
+
+export const faqsFor = (questions: readonly string[]) =>
+  pick(faqs, questions, (f, q) => f.q === q);

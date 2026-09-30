@@ -4,7 +4,7 @@ import { BadgeCheck, Star, Sparkles, HeartHandshake } from "lucide-react";
 import { salon } from "@/lib/salon";
 import { Reveal } from "@/components/site/reveal";
 
-const highlights = [
+export const highlights = [
   {
     icon: BadgeCheck,
     title: "Estilista certificado",
@@ -64,10 +64,10 @@ export function Studio() {
               El Estudio
             </p>
             <h2 className="font-display text-4xl font-medium leading-tight tracking-tight text-foreground sm:text-5xl text-balance">
-              Un espacio dedicado a tu mejor versión
+              Joaquín Alonzo Gaytán, estilista certificado Pivot Point
             </h2>
-            <p className="mt-5 text-base font-light leading-relaxed text-muted-foreground text-pretty">
-              En {salon.name} cada cita es una experiencia. Joaquín combina
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground text-pretty">
+              Un espacio dedicado a tu mejor versión. En {salon.name} cada cita es una experiencia. Joaquín combina
               técnica certificada, productos profesionales y un trato cálido
               para que salgas sintiéndote increíble. Desde un cambio de color
               radical hasta un corte que va contigo, cuidamos cada detalle.
@@ -88,7 +88,7 @@ export function Studio() {
                   <h3 className="text-base font-medium text-foreground">
                     {h.title}
                   </h3>
-                  <p className="mt-1 text-sm font-light leading-relaxed text-muted-foreground">
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                     {h.text}
                   </p>
                 </div>

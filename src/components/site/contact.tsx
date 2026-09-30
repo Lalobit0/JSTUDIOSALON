@@ -1,4 +1,4 @@
-import { MapPin, Clock, Phone, MessageCircle } from "lucide-react";
+import { MapPin, Clock, Phone, MessageCircle, Navigation } from "lucide-react";
 
 import { salon, whatsappBookingLink } from "@/lib/salon";
 import { Button } from "@/components/ui/button";
@@ -37,7 +37,7 @@ export function Contact() {
               {salon.hours.weekdays}
               <br />
               {salon.hours.sunday}
-              <span className="mt-1 block text-sm font-light text-gold">
+              <span className="mt-1 block text-sm text-gold">
                 {salon.hours.note}
               </span>
             </ContactRow>
@@ -76,7 +76,7 @@ export function Contact() {
               </a>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <a
                 href={salon.social.facebook}
                 target="_blank"
@@ -104,21 +104,34 @@ export function Contact() {
               >
                 <TikTokIcon className="size-5" />
               </a>
-              <span className="text-sm font-light text-muted-foreground">
+              <span className="text-sm text-muted-foreground">
                 {salon.social.instagramHandle}
               </span>
             </div>
 
-            <Button asChild size="lg" className="mt-2">
-              <a
-                href={whatsappBookingLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle />
-                Agendar mi cita
-              </a>
-            </Button>
+            <div className="mt-2 grid gap-3 sm:grid-cols-2">
+              <Button asChild size="lg">
+                <a
+                  href={whatsappBookingLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MessageCircle />
+                  Agendar mi cita
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <a
+                  href={salon.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track="directions"
+                >
+                  <Navigation />
+                  Cómo llegar
+                </a>
+              </Button>
+            </div>
           </Reveal>
 
           {/* Map column */}

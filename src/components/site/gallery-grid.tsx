@@ -6,12 +6,27 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import type { GalleryItem } from "@/lib/salon";
+import { trackEvent } from "@/lib/analytics";
 import { Reveal } from "@/components/site/reveal";
 
-export function GalleryGrid({ items }: { items: readonly GalleryItem[] }) {
+export function GalleryGrid({
+  items,
+  className,
+}: {
+  items: readonly GalleryItem[];
+  className?: string;
+}) {
   const [index, setIndex] = React.useState<number | null>(null);
   const open = index !== null;
+  const dialogRef = React.useRef<HTMLDivElement>(null);
+  const closeRef = React.useRef<HTMLButtonElement>(null);
+  const triggerRef = React.useRef<HTMLElement | null>(null);
 
+  const show = (i: number) => {
+    triggerRef.current = document.activeElement as HTMLElement | null;
+    setIndex(i);
+    trackEvent("gallery_open", { image: items[i].alt });
+  };
   const close = React.useCallback(() => setIndex(null), []);
   const go = React.useCallback(
     (dir: number) =>
@@ -21,22 +36,43 @@ export function GalleryGrid({ items }: { items: readonly GalleryItem[] }) {
 
   React.useEffect(() => {
     if (!open) return;
+    closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
       if (e.key === "ArrowRight") go(1);
       if (e.key === "ArrowLeft") go(-1);
+      // Keep keyboard focus inside the dialog.
+      if (e.key === "Tab" && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll<HTMLElement>("button");
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      // Return focus to the thumbnail that opened the lightbox.
+      triggerRef.current?.focus();
     };
   }, [open, close, go]);
 
   return (
     <>
-      <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+      <div
+        className={cn(
+          "mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4",
+          className,
+        )}
+      >
         {items.map((item, i) => (
           <Reveal
             key={item.src}
@@ -45,7 +81,7 @@ export function GalleryGrid({ items }: { items: readonly GalleryItem[] }) {
           >
             <button
               type="button"
-              onClick={() => setIndex(i)}
+              onClick={() => show(i)}
               aria-label={`Ampliar: ${item.alt}`}
               className="absolute inset-0 cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
@@ -65,6 +101,7 @@ export function GalleryGrid({ items }: { items: readonly GalleryItem[] }) {
       {/* Lightbox */}
       {open && index !== null && (
         <div
+          ref={dialogRef}
           role="dialog"
           aria-modal="true"
           aria-label={items[index].alt}
@@ -72,6 +109,7 @@ export function GalleryGrid({ items }: { items: readonly GalleryItem[] }) {
           className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
         >
           <button
+            ref={closeRef}
             type="button"
             onClick={close}
             aria-label="Cerrar"

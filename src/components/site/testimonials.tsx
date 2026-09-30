@@ -1,23 +1,11 @@
-import { Star, Quote, ExternalLink } from "lucide-react";
+import { Quote, ExternalLink } from "lucide-react";
 
 import { salon, testimonials } from "@/lib/salon";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
-
-function Stars({ value = 5, className = "" }: { value?: number; className?: string }) {
-  return (
-    <span className={`flex ${className}`} aria-hidden="true">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className="size-4 fill-gold text-gold"
-          style={{ opacity: i < Math.round(value) ? 1 : 0.25 }}
-        />
-      ))}
-    </span>
-  );
-}
+import { Marquee } from "@/components/site/marquee";
+import { Stars } from "@/components/site/stars";
 
 export function Testimonials() {
   return (
@@ -27,8 +15,8 @@ export function Testimonials() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Reseñas"
-          title="Lo que dicen nuestros clientes"
-          description="Calificación verificada por la comunidad de Google."
+          title="Reseñas de clientes en Google"
+          description="Lo que dicen nuestros clientes, con la calificación de la comunidad de Google."
         />
 
         {/* Aggregate rating — verified social proof */}
@@ -40,7 +28,7 @@ export function Testimonials() {
                 {salon.rating.toFixed(1)}
               </p>
               <Stars value={salon.rating} className="mt-3 justify-center" />
-              <p className="mt-4 text-sm font-light text-muted-foreground">
+              <p className="mt-4 text-sm text-muted-foreground">
                 Basado en{" "}
                 <span className="text-foreground">{salon.reviews} reseñas</span>{" "}
                 en Google
@@ -50,6 +38,7 @@ export function Testimonials() {
                   href={salon.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-track="reviews"
                 >
                   <ExternalLink />
                   Ver reseñas en Google
@@ -58,33 +47,30 @@ export function Testimonials() {
             </div>
           </div>
         </Reveal>
-
       </div>
 
       {/* Animated, full-bleed marquee of real reviews */}
       {testimonials.length > 0 && (
-        <div className="marquee-viewport relative mt-14 w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_7%,black_93%,transparent)]">
-          <div className="marquee-track gap-5">
-            {[...testimonials, ...testimonials].map((t, i) => (
-              <article
-                key={`${t.name}-${i}`}
-                aria-hidden={i >= testimonials.length}
-                className="flex w-[19rem] shrink-0 flex-col rounded-2xl border border-border bg-card/60 p-7 backdrop-blur-sm sm:w-[22rem]"
-              >
-                <Quote className="size-6 text-gold/50" />
-                <p className="mt-4 flex-1 text-sm font-light leading-relaxed text-foreground/90">
-                  “{t.quote}”
-                </p>
-                <div className="mt-5 flex items-center justify-between border-t border-border/60 pt-4">
-                  <span className="text-sm font-medium text-foreground">
-                    {t.name}
-                  </span>
-                  <Stars value={t.rating ?? 5} />
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
+        <Marquee label="reseñas" className="mt-14" trackClassName="gap-5">
+          {[...testimonials, ...testimonials].map((t, i) => (
+            <article
+              key={`${t.name}-${i}`}
+              aria-hidden={i >= testimonials.length}
+              className="flex w-[19rem] shrink-0 flex-col rounded-2xl border border-border bg-card/60 p-7 backdrop-blur-sm sm:w-[22rem]"
+            >
+              <Quote className="size-6 text-gold/50" />
+              <p className="mt-4 flex-1 text-sm leading-relaxed text-foreground/90">
+                “{t.quote}”
+              </p>
+              <div className="mt-5 flex items-center justify-between border-t border-border/60 pt-4">
+                <span className="text-sm font-medium text-foreground">
+                  {t.name}
+                </span>
+                <Stars value={t.rating ?? 5} />
+              </div>
+            </article>
+          ))}
+        </Marquee>
       )}
     </section>
   );

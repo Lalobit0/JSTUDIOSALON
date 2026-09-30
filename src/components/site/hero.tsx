@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { Star, MessageCircle, MapPin, ArrowDown } from "lucide-react";
+import { MessageCircle, MapPin, ArrowDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Stars } from "@/components/site/stars";
 import { salon, whatsappBookingLink } from "@/lib/salon";
 
 export function Hero() {
@@ -10,13 +11,16 @@ export function Hero() {
       id="inicio"
       className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 pt-28 pb-16 text-center sm:px-8"
     >
-      {/* Real work photo behind everything, heavily darkened for legibility */}
+      {/* Real work photo, darkened for legibility. Decorative: the copy below
+          describes the service. Shown at 40% opacity, so a lower quality and
+          an 828px cap cost nothing visible and keep LCP down on phones. */}
       <Image
         src="/hero.webp"
-        alt="Balayage con ondas realizado en Joaquín Studio Salon"
+        alt=""
         fill
         priority
-        sizes="100vw"
+        quality={50}
+        sizes="(max-width: 828px) 100vw, 828px"
         className="object-cover object-top opacity-40"
       />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,oklch(0.16_0.012_70/0.85),oklch(0.16_0.012_70/0.7)_45%,oklch(0.16_0.012_70/0.95))]" />
@@ -34,43 +38,30 @@ export function Hero() {
       <div className="pointer-events-none absolute -top-40 left-1/2 size-[42rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,oklch(0.66_0.13_70/0.25),transparent_60%)] blur-2xl" />
 
       <div className="relative z-10 mx-auto max-w-3xl">
-        <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-foreground/5 px-4 py-1.5 text-xs font-light tracking-[0.25em] text-gold uppercase">
-          <Star className="size-3.5 fill-gold text-gold" />
-          {salon.certification} · {salon.title}
+        <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-foreground/5 px-4 py-1.5 text-xs font-normal tracking-[0.18em] text-gold uppercase sm:tracking-[0.25em]">
+          <MapPin className="size-3.5 shrink-0" />
+          {/* The brand is already in the header on phones; keep one line. */}
+          <span className="hidden sm:inline">{salon.name} · </span>
+          El Pípila, Tijuana
         </p>
 
-        <h1 className="font-display text-5xl font-medium leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
-          <span className="block text-foreground">Joaquín</span>
-          <span className="block text-gold-gradient">Studio Salon</span>
+        <h1 className="font-display text-[2.35rem] font-medium leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-7xl">
+          <span className="block text-foreground">Balayage, color y cortes</span>
+          <span className="block text-gold-gradient">profesionales en Tijuana</span>
         </h1>
 
         <p className="mx-auto mt-7 max-w-xl text-lg font-light leading-relaxed text-muted-foreground text-balance">
-          {salon.tagline} De la mano de{" "}
-          <span className="text-foreground">{salon.stylist}</span>, estilista
-          certificado Pivot Point.
+          Con <span className="text-foreground">{salon.stylist}</span>,
+          estilista certificado {salon.certification}. Precios desde $200,
+          productos Olaplex y atención solo con cita.
         </p>
 
-        {/* Rating + location strip */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
-          <span className="inline-flex items-center gap-2">
-            <span className="flex">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className="size-4 fill-gold text-gold"
-                  style={{ opacity: i < Math.round(salon.rating) ? 1 : 0.3 }}
-                />
-              ))}
-            </span>
-            <span className="text-foreground">{salon.rating}</span>
-            <span>· {salon.reviews} reseñas en Google</span>
-          </span>
-          <span className="hidden h-4 w-px bg-border sm:block" />
-          <span className="inline-flex items-center gap-2">
-            <MapPin className="size-4 text-gold" />
-            El Pípila, Tijuana B.C.
-          </span>
-        </div>
+        {/* Google rating */}
+        <p className="mt-8 inline-flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
+          <Stars value={salon.rating} />
+          <span className="text-foreground">{salon.rating}</span>
+          <span>· {salon.reviews} reseñas en Google</span>
+        </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild size="lg">
@@ -84,7 +75,7 @@ export function Hero() {
             </a>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <a href="#precios">Ver lista de precios</a>
+            <a href="#precios">Ver precios</a>
           </Button>
         </div>
       </div>
@@ -92,9 +83,9 @@ export function Hero() {
       <a
         href="#servicios"
         aria-label="Desplazarse a servicios"
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-muted-foreground transition-colors hover:text-gold"
+        className="absolute bottom-6 left-1/2 z-10 flex size-11 -translate-x-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-gold"
       >
-        <ArrowDown className="size-5 animate-bounce" />
+        <ArrowDown className="size-5 animate-bounce motion-reduce:animate-none" />
       </a>
     </section>
   );
