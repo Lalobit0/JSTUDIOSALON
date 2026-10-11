@@ -31,6 +31,28 @@ pnpm start        # sirve el build
 pnpm lint         # ESLint
 ```
 
+## Entornos: pruebas y producción
+
+| Rama | Para qué | Dirección |
+|---|---|---|
+| `staging` | **Pruebas.** Aquí se revisan los cambios antes de publicarlos | https://jstudiosalon-git-staging-edgarsix20-3416s-projects.vercel.app (pide iniciar sesión en Vercel) |
+| `main` | **Producción.** Lo que ven los clientes | https://joaquinstudiosalon.com |
+
+Flujo para cada cambio:
+
+1. Se trabaja en una rama propia y se abre un pull request hacia `staging`.
+2. Al unirlo, Vercel publica la versión de pruebas en la dirección de `staging`.
+3. Se revisa en celular y computadora.
+4. Si todo está bien, se abre un pull request de `staging` hacia `main`; al
+   unirlo, Vercel publica en producción.
+
+Notas:
+
+- Google Tag Manager solo está activo en producción (`NEXT_PUBLIC_GTM_ID`
+  solo tiene el entorno *Production* en Vercel), así que las visitas de prueba
+  no cuentan en Google Analytics.
+- Vercel marca las versiones de prueba con `noindex`: Google no las indexa.
+
 ## Google Tag Manager / GA4 / Google Ads
 
 GTM **no se carga** hasta definir la variable de entorno
