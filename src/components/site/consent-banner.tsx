@@ -12,6 +12,38 @@ import {
   saveConsent,
   type ConsentChoice,
 } from "@/lib/analytics";
+import { routes, type Locale } from "@/lib/i18n";
+
+const copy = {
+  es: {
+    title: "Tu privacidad",
+    body: "Con tu permiso usamos cookies de Google Analytics y Google Ads para medir las visitas y saber qué anuncios funcionan. Sin tu permiso no se guardan. Más detalles en el",
+    privacy: "Aviso de privacidad",
+    legend: "Preferencias de cookies",
+    analytics: "Analíticas",
+    analyticsText: "Google Analytics: cuántas personas visitan y qué secciones usan.",
+    marketing: "Publicidad",
+    marketingText: "Google Ads: medir qué anuncios generan citas y mostrar anuncios relevantes.",
+    save: "Guardar preferencias",
+    accept: "Aceptar",
+    reject: "Rechazar",
+    customize: "Configurar",
+  },
+  en: {
+    title: "Your privacy",
+    body: "With your permission we use Google Analytics and Google Ads cookies to measure visits and see which ads work. Without your permission, nothing is stored. More details in the",
+    privacy: "Privacy notice",
+    legend: "Cookie preferences",
+    analytics: "Analytics",
+    analyticsText: "Google Analytics: how many people visit and which sections they use.",
+    marketing: "Advertising",
+    marketingText: "Google Ads: measure which ads lead to appointments and show relevant ads.",
+    save: "Save preferences",
+    accept: "Accept",
+    reject: "Reject",
+    customize: "Customize",
+  },
+} satisfies Record<Locale, unknown>;
 
 const NONE: ConsentChoice = { analytics: false, marketing: false };
 
@@ -28,7 +60,8 @@ function subscribe(onChange: () => void) {
  * Cookie consent for Google Analytics / Google Ads. Only mounted when GTM is
  * configured; the footer can reopen it through OPEN_CONSENT_EVENT.
  */
-export function ConsentBanner() {
+export function ConsentBanner({ lang }: { lang: Locale }) {
+  const t = copy[lang];
   // "ssr" on the server so the banner never renders into the static HTML.
   const stored = React.useSyncExternalStore(subscribe, readConsentRaw, () => "ssr");
   const [editing, setEditing] = React.useState(false);
@@ -64,21 +97,19 @@ export function ConsentBanner() {
       className="fixed inset-x-3 bottom-3 z-[70] mx-auto max-w-2xl rounded-2xl border border-gold/30 bg-card/95 p-5 shadow-2xl backdrop-blur-xl sm:inset-x-6 sm:bottom-6 sm:p-6"
     >
       <p id="consent-title" className="font-display text-xl font-medium text-foreground">
-        Tu privacidad
+        {t.title}
       </p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-        Con tu permiso usamos cookies de Google Analytics y Google Ads para
-        medir las visitas y saber qué anuncios funcionan. Sin tu permiso no se
-        guardan. Más detalles en el{" "}
-        <Link href="/aviso-de-privacidad" className="text-gold underline underline-offset-4">
-          Aviso de privacidad
+        {t.body}{" "}
+        <Link href={routes.privacy[lang]} className="text-gold underline underline-offset-4">
+          {t.privacy}
         </Link>
         .
       </p>
 
       {customize && (
         <fieldset className="mt-4 flex flex-col gap-3 text-sm">
-          <legend className="sr-only">Preferencias de cookies</legend>
+          <legend className="sr-only">{t.legend}</legend>
           <label className="flex items-start gap-3">
             <input
               type="checkbox"
@@ -87,10 +118,8 @@ export function ConsentBanner() {
               onChange={(e) => setChoice((c) => ({ ...c, analytics: e.target.checked }))}
             />
             <span>
-              <span className="font-medium text-foreground">Analíticas</span>
-              <span className="block text-muted-foreground">
-                Google Analytics: cuántas personas visitan y qué secciones usan.
-              </span>
+              <span className="font-medium text-foreground">{t.analytics}</span>
+              <span className="block text-muted-foreground">{t.analyticsText}</span>
             </span>
           </label>
           <label className="flex items-start gap-3">
@@ -101,10 +130,8 @@ export function ConsentBanner() {
               onChange={(e) => setChoice((c) => ({ ...c, marketing: e.target.checked }))}
             />
             <span>
-              <span className="font-medium text-foreground">Publicidad</span>
-              <span className="block text-muted-foreground">
-                Google Ads: medir qué anuncios generan citas y mostrar anuncios relevantes.
-              </span>
+              <span className="font-medium text-foreground">{t.marketing}</span>
+              <span className="block text-muted-foreground">{t.marketingText}</span>
             </span>
           </label>
         </fieldset>
@@ -113,22 +140,22 @@ export function ConsentBanner() {
       <div className="mt-5 flex flex-wrap gap-3">
         {customize ? (
           <Button size="sm" onClick={() => decide(choice)}>
-            Guardar preferencias
+            {t.save}
           </Button>
         ) : (
           <>
             <Button size="sm" onClick={() => decide({ analytics: true, marketing: true })}>
-              Aceptar
+              {t.accept}
             </Button>
             <Button
               size="sm"
               variant="outline"
               onClick={() => decide({ analytics: false, marketing: false })}
             >
-              Rechazar
+              {t.reject}
             </Button>
             <Button size="sm" variant="ghost" onClick={() => setCustomize(true)}>
-              Configurar
+              {t.customize}
             </Button>
           </>
         )}
@@ -138,14 +165,20 @@ export function ConsentBanner() {
 }
 
 /** Footer link that reopens the consent preferences. */
-export function ConsentPreferencesButton({ className }: { className?: string }) {
+export function ConsentPreferencesButton({
+  lang,
+  className,
+}: {
+  lang: Locale;
+  className?: string;
+}) {
   return (
     <button
       type="button"
       className={className}
       onClick={() => window.dispatchEvent(new Event(OPEN_CONSENT_EVENT))}
     >
-      Preferencias de cookies
+      {copy[lang].legend}
     </button>
   );
 }

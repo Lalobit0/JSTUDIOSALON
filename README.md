@@ -8,6 +8,9 @@ Sitio con página principal (servicios, galería, reseñas, precios, promociones
 estudio, FAQ y ubicación), páginas de servicio para **Novias y XV años** y
 **Balayage y color**, aviso de privacidad y agendado directo por WhatsApp.
 
+Disponible en **español** (raíz `/`) e **inglés** (`/en`), con **modo día**
+opcional (el sitio abre en modo oscuro).
+
 ## Stack
 
 - **Next.js 16** (App Router) + **React 19**
@@ -74,7 +77,9 @@ Variables (y volver a desplegar). Al activarla:
 | `click_social` | Clic a Instagram, Facebook o TikTok | `network`, `cta_location` |
 | `view_pricing` | La sección de precios entra en pantalla | `cta_location` |
 | `faq_open` | Se abre una pregunta frecuente | `question` |
-| `gallery_open` | Se amplía una foto | `image` |
+| `gallery_open` | Se amplía una foto | `image` (nombre del archivo) |
+| `click_language` | Clic en Español / English | `language`, `cta_location` |
+| `theme_change` | Se cambia entre modo día y noche | `theme` (`light` / `dark`) |
 
 `click_whatsapp` y `click_phone` son las conversiones principales (marcarlas
 como eventos clave en GA4). Vercel Web Analytics sigue recibiendo
@@ -85,24 +90,31 @@ como eventos clave en GA4). Vercel Web Analytics sigue recibiendo
 ```
 src/
   app/
-    layout.tsx               # fuentes, metadata base, GTM + consentimiento
-    page.tsx                 # página principal + JSON-LD
-    novias-y-xv-anos/        # página de servicio: novias y XV años
-    balayage-y-color/        # página de servicio: balayage y color
-    aviso-de-privacidad/     # aviso de privacidad
-    not-found.tsx            # 404 con la identidad del sitio
+    (es)/                    # sitio en español: layout raíz con lang="es-MX"
+      page.tsx               #   /
+      novias-y-xv-anos/      #   /novias-y-xv-anos
+      balayage-y-color/      #   /balayage-y-color
+      aviso-de-privacidad/   #   /aviso-de-privacidad
+    (en)/en/                 # sitio en inglés: layout raíz con lang="en"
+      page.tsx               #   /en
+      bridal-and-quinceanera/, balayage-and-color/, privacy-notice/
+    global-not-found.tsx     # 404 (español con una línea en inglés)
     llms.txt/route.ts        # resumen para asistentes de IA (desde salon.ts)
-    globals.css              # tema (tokens OKLCH, utilidades)
-    sitemap.ts / robots.ts
+    globals.css              # tema oscuro y modo día (tokens OKLCH)
+    sitemap.ts / robots.ts   # el sitemap enlaza cada página con su versión en inglés
   components/
+    pages/            # cada página, una sola vez, con prop lang ("es" | "en")
     ui/button.tsx     # botón base estilo shadcn
-    site/             # secciones: navbar, hero, services, studio,
-                      # pricing, contact, footer, whatsapp-float...
+    site/             # secciones: navbar, hero, services, studio, pricing,
+                      # cross-border, contact, footer, theme-toggle,
+                      # language-switcher, root-document...
   lib/
+    i18n.ts           # idiomas y direcciones de cada página en ambos idiomas
     salon.ts          # datos del negocio (contacto, servicios, precios)
     training.ts       # formación de Joaquín (cursos, áreas, indicadores)
+    theme.ts          # modo día / noche (se recuerda en el navegador)
     analytics.ts      # GTM, Consent Mode y eventos del dataLayer
-    seo.tsx           # metadata por página y JSON-LD
+    seo.tsx           # metadata por página, hreflang y JSON-LD
     nav.ts            # enlaces del menú y footer
     utils.ts          # helper cn()
 ```
@@ -114,6 +126,13 @@ servicios y precios) vive en [`src/lib/salon.ts`](src/lib/salon.ts). Cambiar
 ese archivo actualiza el sitio completo.
 
 > Las tarifas corresponden a cabello corto; cabello largo se cotiza en sitio.
+
+**Idiomas**: los textos de `salon.ts` y `training.ts` tienen versión
+`{ es, en }`, y cada sección tiene sus textos al inicio de su archivo
+(`copy.es` / `copy.en`). Al cambiar un texto en español, actualizar también el
+inglés. Las reseñas se muestran en inglés como traducción, junto con el
+original en español. En el salón se habla inglés básico: los mensajes de
+WhatsApp del sitio en inglés incluyen también el español.
 
 La sección **Formación profesional** lee sus datos de
 [`src/lib/training.ts`](src/lib/training.ts). Solo deben agregarse cursos con

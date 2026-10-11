@@ -24,7 +24,9 @@ export function Logo({
         width={44}
         height={44}
         priority={priority}
-        className="size-11 shrink-0 object-contain"
+        // The emblem is drawn for a dark backdrop: keep a dark disc behind it
+        // in light mode.
+        className="size-11 shrink-0 object-contain light:rounded-full light:bg-[#110c08]"
       />
       {withText && (
         <span className="flex flex-col leading-none">
