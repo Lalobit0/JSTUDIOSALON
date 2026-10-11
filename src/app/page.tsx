@@ -4,6 +4,7 @@ import { Services } from "@/components/site/services";
 import { Events } from "@/components/site/events";
 import { Gallery } from "@/components/site/gallery";
 import { Studio } from "@/components/site/studio";
+import { Training } from "@/components/site/training";
 import { Brands } from "@/components/site/brands";
 import { Testimonials } from "@/components/site/testimonials";
 import { Promos } from "@/components/site/promos";
@@ -92,12 +93,29 @@ const structuredData = [
       salon.social.instagram,
       salon.social.tiktok,
     ],
+    employee: { "@id": `${siteUrl}/#joaquin` },
     makesOffer: priceList.flatMap((c) =>
       c.items.map((i) => ({
         "@type": "Offer",
         itemOffered: { "@type": "Service", name: i.name },
       })),
     ),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${siteUrl}/#joaquin`,
+    name: "Joaquín Victorio Alonzo Gaytán",
+    alternateName: salon.stylist,
+    jobTitle: "Estilista",
+    worksFor: { "@id": salonId },
+    knowsAbout: [
+      "Corte de cabello",
+      "Colorimetría",
+      "Balayage y técnicas de mechas",
+      "Barbería",
+      "Tratamientos capilares",
+    ],
   },
 ];
 
@@ -115,6 +133,7 @@ export default function Home() {
         <Pricing />
         <Promos />
         <Studio />
+        <Training />
         <Brands />
         <Faqs />
         <Contact />

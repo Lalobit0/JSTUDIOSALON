@@ -1,4 +1,5 @@
 import { amenities, faqs, priceList, promos, salon, siteUrl } from "@/lib/salon";
+import { courses, specialties } from "@/lib/training";
 
 // Built from the same data as the site, so prices and hours never drift.
 export const dynamic = "force-static";
@@ -30,6 +31,13 @@ ${amenities.map((a) => `- ${a.label}`).join("\n")}
 
 ## Promociones
 ${promos.map((p) => `- ${p.title}: ${p.description}`).join("\n")}
+
+## Formación de Joaquín (cursos documentados)
+${courses
+  .map((c) => `- ${c.period}: ${c.title} — ${c.institution}${c.hours ? ` ${c.hours}` : ""}`)
+  .join("\n")}
+
+Áreas de especialización: ${specialties.map((s) => s.title).join(", ")}.
 
 ## Páginas
 - [Inicio](${siteUrl}/): servicios, galería, precios, reseñas, preguntas frecuentes y ubicación

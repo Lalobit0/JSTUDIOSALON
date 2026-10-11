@@ -292,7 +292,7 @@ export const promos: Promo[] = [
     badge: "Cumpleaños",
     title: "Regalo en tu cumpleaños",
     description:
-      "Si tu cita es el día de tu cumpleaños, te llevas un producto de regalo.",
+      "Si tu cita es el mismo día de tu cumpleaños, te llevas un producto de regalo.",
     cta: "Agendar en mi cumpleaños",
     whatsappMessage:
       "¡Hola Joaquín! Quiero agendar mi cita el día de mi cumpleaños para recibir mi producto de regalo. Mi cumpleaños es el: ",
@@ -311,7 +311,7 @@ export type Amenity = {
 
 export const amenities: Amenity[] = [
   { label: "Aire acondicionado", icon: "airVent" },
-  { label: "Wi-Fi para clientes", icon: "wifi" },
+  { label: "Wi-Fi gratis", icon: "wifi" },
   { label: "Lavado de cabello incluido", icon: "shower" },
 ];
 
@@ -367,7 +367,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "¿Qué comodidades tiene el salón?",
-    a: "Contamos con aire acondicionado y Wi-Fi para clientes, y el lavado de cabello está incluido.",
+    a: "Contamos con aire acondicionado y Wi-Fi gratis, y el lavado de cabello está incluido.",
   },
   {
     q: "¿Atienden cabello largo?",
