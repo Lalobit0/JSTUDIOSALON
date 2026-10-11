@@ -12,7 +12,7 @@ import { Faqs } from "@/components/site/faq";
 import { Contact } from "@/components/site/contact";
 import { Footer } from "@/components/site/footer";
 import { WhatsAppFloat } from "@/components/site/whatsapp-float";
-import { salon, priceList, siteUrl } from "@/lib/salon";
+import { amenities, salon, priceList, siteUrl } from "@/lib/salon";
 import { JsonLd, pageMetadata, salonId } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -61,6 +61,11 @@ const structuredData = [
       longitude: salon.coordinates.lng,
     },
     hasMap: salon.googleMapsUrl,
+    amenityFeature: amenities.map((a) => ({
+      "@type": "LocationFeatureSpecification",
+      name: a.label,
+      value: true,
+    })),
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",

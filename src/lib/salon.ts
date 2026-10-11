@@ -288,6 +288,31 @@ export const promos: Promo[] = [
     whatsappMessage:
       "¡Hola Joaquín! Quiero recomendar a una amiga para la promo de referidos. ¿Cómo funciona?",
   },
+  {
+    badge: "Cumpleaños",
+    title: "Regalo en tu cumpleaños",
+    description:
+      "Si tu cita es el día de tu cumpleaños, te llevas un producto de regalo.",
+    cta: "Agendar en mi cumpleaños",
+    whatsappMessage:
+      "¡Hola Joaquín! Quiero agendar mi cita el día de mi cumpleaños para recibir mi producto de regalo. Mi cumpleaños es el: ",
+  },
+];
+
+/* ----------------------------------------------------------------------------
+ * Comodidades del salón (valor agregado confirmado por el negocio)
+ * -------------------------------------------------------------------------- */
+
+export type Amenity = {
+  label: string;
+  /** lucide icon resolved in the component */
+  icon: "airVent" | "wifi" | "shower";
+};
+
+export const amenities: Amenity[] = [
+  { label: "Aire acondicionado", icon: "airVent" },
+  { label: "Wi-Fi para clientes", icon: "wifi" },
+  { label: "Lavado de cabello incluido", icon: "shower" },
 ];
 
 
@@ -339,6 +364,10 @@ export const faqs: Faq[] = [
   {
     q: "¿Necesito cita o atienden por orden de llegada?",
     a: "Todo el trabajo es con cita previa para darte una atención personalizada y sin esperas. Agenda fácil por WhatsApp.",
+  },
+  {
+    q: "¿Qué comodidades tiene el salón?",
+    a: "Contamos con aire acondicionado y Wi-Fi para clientes, y el lavado de cabello está incluido.",
   },
   {
     q: "¿Atienden cabello largo?",
