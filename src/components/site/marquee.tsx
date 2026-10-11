@@ -25,9 +25,14 @@ export function Marquee({
 
   return (
     <div className={className}>
+      {/* Focusable so keyboard users can pause it (focus-within) and, with
+          reduced motion, scroll it horizontally. */}
       <div
         data-paused={paused}
-        className="marquee-viewport relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_7%,black_93%,transparent)]"
+        role="region"
+        aria-label={label}
+        tabIndex={0}
+        className="marquee-viewport relative w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring [mask-image:linear-gradient(to_right,transparent,black_7%,black_93%,transparent)]"
       >
         <div className={cn("marquee-track", trackClassName)}>{children}</div>
       </div>

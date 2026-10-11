@@ -7,9 +7,9 @@ import { siteUrl } from "@/lib/salon";
  * date). Update it when editing a page's text, photos or prices.
  */
 const pages: { path: string; lastModified: string; priority: number }[] = [
-  { path: "/", lastModified: "2026-09-29", priority: 1 },
-  { path: "/novias-y-xv-anos", lastModified: "2026-09-29", priority: 0.9 },
-  { path: "/balayage-y-color", lastModified: "2026-09-29", priority: 0.9 },
+  { path: "/", lastModified: "2026-10-11", priority: 1 },
+  { path: "/novias-y-xv-anos", lastModified: "2026-10-11", priority: 0.9 },
+  { path: "/balayage-y-color", lastModified: "2026-10-11", priority: 0.9 },
   { path: "/aviso-de-privacidad", lastModified: "2026-09-29", priority: 0.2 },
 ];
 

@@ -3,6 +3,7 @@ import { BadgeCheck, Star, Sparkles, HeartHandshake } from "lucide-react";
 
 import { salon } from "@/lib/salon";
 import { Reveal } from "@/components/site/reveal";
+import { Amenities } from "@/components/site/amenities";
 
 export const highlights = [
   {
@@ -95,6 +96,13 @@ export function Studio() {
               </Reveal>
             ))}
           </div>
+
+          <Reveal className="mt-10">
+            <h3 className="text-xs font-medium tracking-[0.3em] text-gold uppercase">
+              Comodidades del salón
+            </h3>
+            <Amenities className="mt-4" />
+          </Reveal>
         </div>
       </div>
     </section>

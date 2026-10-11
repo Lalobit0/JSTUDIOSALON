@@ -5,6 +5,7 @@ import { salon } from "@/lib/salon";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
 import { Stars } from "@/components/site/stars";
+import { Amenities } from "@/components/site/amenities";
 
 /** Building blocks shared by the service pages (novias, color). */
 
@@ -102,6 +103,7 @@ export function LandingVisit({
             </span>
           </li>
         </ul>
+        <Amenities align="center" className="mt-8" />
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
           <Button asChild size="lg">
             <a href={cta.href} target="_blank" rel="noopener noreferrer">

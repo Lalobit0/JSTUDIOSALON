@@ -1,4 +1,4 @@
-import { faqs, priceList, salon, siteUrl } from "@/lib/salon";
+import { amenities, faqs, priceList, promos, salon, siteUrl } from "@/lib/salon";
 
 // Built from the same data as the site, so prices and hours never drift.
 export const dynamic = "force-static";
@@ -24,6 +24,12 @@ export function GET() {
 - WhatsApp (citas): ${salon.whatsapp.display} — ${salon.whatsapp.link}
 - Horario: ${salon.hours.weekdays}; ${salon.hours.sunday} ${salon.hours.note}
 - Google Maps: ${salon.googleMapsUrl}
+
+## Comodidades
+${amenities.map((a) => `- ${a.label}`).join("\n")}
+
+## Promociones
+${promos.map((p) => `- ${p.title}: ${p.description}`).join("\n")}
 
 ## Páginas
 - [Inicio](${siteUrl}/): servicios, galería, precios, reseñas, preguntas frecuentes y ubicación

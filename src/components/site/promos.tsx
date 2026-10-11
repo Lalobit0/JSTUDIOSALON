@@ -1,13 +1,15 @@
-import { Gift, Users, MessageCircle, type LucideIcon } from "lucide-react";
+import { Cake, Gift, Users, MessageCircle, type LucideIcon } from "lucide-react";
 
 import { promos, whatsappLink } from "@/lib/salon";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
+import { cn } from "@/lib/utils";
 
 const badgeIcons: Record<string, LucideIcon> = {
   "Clientes nuevos": Gift,
   Referidos: Users,
+  Cumpleaños: Cake,
 };
 
 export function Promos() {
@@ -19,17 +21,22 @@ export function Promos() {
         <SectionHeading
           eyebrow="Promociones"
           title="Promociones vigentes"
-          description="Más razones para visitarnos: beneficios para clientes nuevos y para quienes nos recomiendan."
+          description="Más razones para visitarnos: beneficios para clientes nuevos, para quienes nos recomiendan y en tu cumpleaños."
         />
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {promos.map((promo, i) => {
             const Icon = badgeIcons[promo.badge] ?? Gift;
+            // With an odd count, the last card fills the row on 2-column screens.
+            const lastOdd = i === promos.length - 1 && promos.length % 2 === 1;
             return (
               <Reveal
                 key={promo.title}
                 delay={i * 100}
-                className="group relative flex flex-col overflow-hidden rounded-3xl border border-gold/25 bg-card/60 p-8 backdrop-blur-sm sm:p-10"
+                className={cn(
+                  "group relative flex flex-col overflow-hidden rounded-3xl border border-gold/25 bg-card/60 p-8 backdrop-blur-sm sm:p-10",
+                  lastOdd && "md:col-span-2 lg:col-span-1",
+                )}
               >
                 <div className="pointer-events-none absolute -right-12 -top-12 size-40 rounded-full bg-[radial-gradient(circle,oklch(0.66_0.13_70/0.18),transparent_65%)] opacity-70 blur-xl transition-opacity duration-300 group-hover:opacity-100" />
                 <span className="relative inline-flex w-fit items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-xs font-medium tracking-wide text-gold uppercase">
