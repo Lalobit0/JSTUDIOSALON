@@ -6,16 +6,28 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import type { GalleryItem } from "@/lib/salon";
+import type { Locale } from "@/lib/i18n";
 import { trackEvent } from "@/lib/analytics";
 import { Reveal } from "@/components/site/reveal";
 
+const copy = {
+  es: { enlarge: "Ampliar", close: "Cerrar", previous: "Anterior", next: "Siguiente" },
+  en: { enlarge: "Enlarge", close: "Close", previous: "Previous", next: "Next" },
+} satisfies Record<Locale, unknown>;
+
+/** File name without folder or extension: stable across languages. */
+const photoId = (src: string) => src.replace(/^.*\//, "").replace(/\.\w+$/, "");
+
 export function GalleryGrid({
   items,
+  lang,
   className,
 }: {
   items: readonly GalleryItem[];
+  lang: Locale;
   className?: string;
 }) {
+  const t = copy[lang];
   const [index, setIndex] = React.useState<number | null>(null);
   const open = index !== null;
   const dialogRef = React.useRef<HTMLDivElement>(null);
@@ -25,7 +37,7 @@ export function GalleryGrid({
   const show = (i: number) => {
     triggerRef.current = document.activeElement as HTMLElement | null;
     setIndex(i);
-    trackEvent("gallery_open", { image: items[i].alt });
+    trackEvent("gallery_open", { image: photoId(items[i].src) });
   };
   const close = React.useCallback(() => setIndex(null), []);
   const go = React.useCallback(
@@ -82,7 +94,7 @@ export function GalleryGrid({
             <button
               type="button"
               onClick={() => show(i)}
-              aria-label={`Ampliar: ${item.alt}`}
+              aria-label={`${t.enlarge}: ${item.alt}`}
               className="absolute inset-0 cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               <Image
@@ -112,14 +124,14 @@ export function GalleryGrid({
             ref={closeRef}
             type="button"
             onClick={close}
-            aria-label="Cerrar"
+            aria-label={t.close}
             className="absolute right-4 top-4 flex size-11 items-center justify-center rounded-full border border-white/20 text-white/80 transition-colors hover:border-gold/60 hover:text-gold"
           >
             <X className="size-5" />
           </button>
 
-          <NavButton side="left" onClick={() => go(-1)} />
-          <NavButton side="right" onClick={() => go(1)} />
+          <NavButton side="left" label={t.previous} onClick={() => go(-1)} />
+          <NavButton side="right" label={t.next} onClick={() => go(1)} />
 
           <figure
             onClick={(e) => e.stopPropagation()}
@@ -148,9 +160,11 @@ export function GalleryGrid({
 
 function NavButton({
   side,
+  label,
   onClick,
 }: {
   side: "left" | "right";
+  label: string;
   onClick: () => void;
 }) {
   const Icon = side === "left" ? ChevronLeft : ChevronRight;
@@ -161,7 +175,7 @@ function NavButton({
         e.stopPropagation();
         onClick();
       }}
-      aria-label={side === "left" ? "Anterior" : "Siguiente"}
+      aria-label={label}
       className={cn(
         "absolute top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 text-white/80 transition-colors hover:border-gold/60 hover:text-gold",
         side === "left" ? "left-3 sm:left-6" : "right-3 sm:right-6",
