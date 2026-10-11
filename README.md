@@ -100,6 +100,7 @@ src/
                       # pricing, contact, footer, whatsapp-float...
   lib/
     salon.ts          # datos del negocio (contacto, servicios, precios)
+    training.ts       # formación de Joaquín (cursos, áreas, indicadores)
     analytics.ts      # GTM, Consent Mode y eventos del dataLayer
     seo.tsx           # metadata por página y JSON-LD
     nav.ts            # enlaces del menú y footer
@@ -113,6 +114,10 @@ servicios y precios) vive en [`src/lib/salon.ts`](src/lib/salon.ts). Cambiar
 ese archivo actualiza el sitio completo.
 
 > Las tarifas corresponden a cabello corto; cabello largo se cotiza en sitio.
+
+La sección **Formación profesional** lee sus datos de
+[`src/lib/training.ts`](src/lib/training.ts). Solo deben agregarse cursos con
+constancia; el indicador de cursos se calcula solo a partir de la lista.
 
 Mantenimiento:
 
