@@ -1,29 +1,47 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import { salon, siteUrl } from "@/lib/salon";
+import { htmlLang, ogLocale, routes, type Locale, type RouteKey } from "@/lib/i18n";
+import { themeColors } from "@/lib/theme";
+
+/** Absolute URL of a path ("/" stays without a trailing slash). */
+export const absoluteUrl = (path: string) =>
+  path === "/" ? siteUrl : `${siteUrl}${path}`;
 
 /**
  * Per-page metadata. Next.js replaces (does not merge) nested `openGraph` and
- * `twitter` objects, so every page builds them in full here.
+ * `twitter` objects, so every page builds them in full here. Each page points
+ * to its version in the other language (hreflang); Spanish is the default.
  */
 export function pageMetadata({
   title,
   description,
-  path,
+  route,
+  lang,
 }: {
   title: string;
   description: string;
-  path: string;
+  route: RouteKey;
+  lang: Locale;
 }): Metadata {
-  const url = path === "/" ? siteUrl : `${siteUrl}${path}`;
+  const url = absoluteUrl(routes[route][lang]);
+  const other: Locale = lang === "es" ? "en" : "es";
   const image = { url: "/og.jpg", width: 1200, height: 630, alt: salon.name };
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      languages: {
+        [htmlLang.es]: absoluteUrl(routes[route].es),
+        [htmlLang.en]: absoluteUrl(routes[route].en),
+        "x-default": absoluteUrl(routes[route].es),
+      },
+    },
     openGraph: {
       type: "website",
-      locale: "es_MX",
+      locale: ogLocale[lang],
+      alternateLocale: [ogLocale[other]],
       siteName: salon.name,
       url,
       title,
@@ -63,3 +81,29 @@ export function breadcrumbs(items: { name: string; path: string }[]) {
     })),
   };
 }
+
+/**
+ * Defaults for each language's root layout. Every page sets its own title,
+ * description and canonical on top of these.
+ */
+export function siteMetadata(lang: Locale): Metadata {
+  return {
+    metadataBase: new URL(siteUrl),
+    title: { default: salon.name, template: `%s | ${salon.name}` },
+    applicationName: salon.name,
+    authors: [{ name: salon.stylist }],
+    openGraph: {
+      type: "website",
+      locale: ogLocale[lang],
+      siteName: salon.name,
+      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: salon.name }],
+    },
+    twitter: { card: "summary_large_image", images: ["/og.jpg"] },
+  };
+}
+
+export const siteViewport: Viewport = {
+  themeColor: themeColors.dark,
+  width: "device-width",
+  initialScale: 1,
+};

@@ -12,12 +12,17 @@ import { cn } from "@/lib/utils";
 export function Marquee({
   children,
   label,
+  pauseLabel,
+  resumeLabel,
   className,
   trackClassName,
 }: {
   children: React.ReactNode;
-  /** What is moving, for the button text: "reseñas", "marcas"… */
+  /** Name of the region: "reseñas", "marcas"… */
   label: string;
+  /** Button text, e.g. "Pausar reseñas" / "Reanudar reseñas" */
+  pauseLabel: string;
+  resumeLabel: string;
   className?: string;
   trackClassName?: string;
 }) {
@@ -25,9 +30,14 @@ export function Marquee({
 
   return (
     <div className={className}>
+      {/* Focusable so keyboard users can pause it (focus-within) and, with
+          reduced motion, scroll it horizontally. */}
       <div
         data-paused={paused}
-        className="marquee-viewport relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_7%,black_93%,transparent)]"
+        role="region"
+        aria-label={label}
+        tabIndex={0}
+        className="marquee-viewport relative w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring [mask-image:linear-gradient(to_right,transparent,black_7%,black_93%,transparent)]"
       >
         <div className={cn("marquee-track", trackClassName)}>{children}</div>
       </div>
@@ -39,7 +49,7 @@ export function Marquee({
           className="inline-flex min-h-11 items-center gap-2 rounded-md px-3 text-xs tracking-wide text-muted-foreground transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           {paused ? <Play className="size-3.5" /> : <Pause className="size-3.5" />}
-          {paused ? `Reanudar ${label}` : `Pausar ${label}`}
+          {paused ? resumeLabel : pauseLabel}
         </button>
       </div>
     </div>

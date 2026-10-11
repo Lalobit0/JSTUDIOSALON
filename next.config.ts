@@ -21,6 +21,11 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  experimental: {
+    // Two root layouts (Spanish and English) need one 404 for unknown URLs:
+    // app/global-not-found.tsx.
+    globalNotFound: true,
+  },
   images: {
     // Next 16 requires every quality used by <Image> to be allowlisted.
     qualities: [50, 75],
