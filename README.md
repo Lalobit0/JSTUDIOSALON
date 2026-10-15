@@ -74,6 +74,7 @@ Variables (y volver a desplegar). Al activarla:
 | `click_phone` | Clic en un teléfono | `cta_location`, `cta_text`, `page_path` |
 | `click_directions` | Clic en "Cómo llegar" | `cta_location` |
 | `click_reviews` | Clic en "Ver reseñas en Google" | `cta_location` |
+| `click_write_review` | Clic en "Déjanos tu reseña" (abre la ventana de reseña de Google) | `cta_location` |
 | `click_social` | Clic a Instagram, Facebook o TikTok | `network`, `cta_location` |
 | `view_pricing` | La sección de precios entra en pantalla | `cta_location` |
 | `faq_open` | Se abre una pregunta frecuente | `question` |
