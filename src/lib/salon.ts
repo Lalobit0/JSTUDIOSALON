@@ -59,6 +59,8 @@ export const salon = {
   // 32°29'31.2"N 116°52'30.0"W
   coordinates: { lat: 32.492, lng: -116.875 },
   googleMapsUrl: "https://maps.app.goo.gl/kMdqwCBMybu1oQmm9",
+  /** Abre directo la ventana "Escribir reseña" del perfil de Google. */
+  googleReviewUrl: "https://g.page/r/CX94ZwOuWsclEBM/review",
   /** Formas de pago confirmadas por el negocio. */
   payments: {
     es: "Efectivo en pesos o dólares, tarjeta y transferencia.",
