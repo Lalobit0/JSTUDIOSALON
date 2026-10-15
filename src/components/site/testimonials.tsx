@@ -1,4 +1,4 @@
-import { Quote, ExternalLink } from "lucide-react";
+import { Quote, ExternalLink, PenLine } from "lucide-react";
 
 import { salon, testimonials } from "@/lib/salon";
 import type { Locale } from "@/lib/i18n";
@@ -18,6 +18,7 @@ const copy = {
     reviews: `${salon.reviews} reseñas`,
     onGoogle: "en Google",
     cta: "Ver reseñas en Google",
+    write: "Déjanos tu reseña",
     region: "reseñas",
     pause: "Pausar reseñas",
     resume: "Reanudar reseñas",
@@ -32,6 +33,7 @@ const copy = {
     reviews: `${salon.reviews} reviews`,
     onGoogle: "on Google",
     cta: "See reviews on Google",
+    write: "Leave us a review",
     region: "reviews",
     pause: "Pause reviews",
     resume: "Resume reviews",
@@ -62,17 +64,30 @@ export function Testimonials({ lang }: { lang: Locale }) {
                 <span className="text-foreground">{t.reviews}</span>{" "}
                 {t.onGoogle}
               </p>
-              <Button asChild variant="outline" size="sm" className="mt-7">
-                <a
-                  href={salon.googleMapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-track="reviews"
-                >
-                  <ExternalLink />
-                  {t.cta}
-                </a>
-              </Button>
+              <div className="mt-7 flex flex-wrap justify-center gap-3">
+                <Button asChild size="sm">
+                  <a
+                    href={salon.googleReviewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track="write_review"
+                  >
+                    <PenLine />
+                    {t.write}
+                  </a>
+                </Button>
+                <Button asChild variant="outline" size="sm">
+                  <a
+                    href={salon.googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track="reviews"
+                  >
+                    <ExternalLink />
+                    {t.cta}
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </Reveal>

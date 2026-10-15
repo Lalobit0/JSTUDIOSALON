@@ -26,7 +26,8 @@ function locate(el: Element) {
  * calls only) and to the GTM dataLayer (all events):
  * - wa.me links        -> click_whatsapp   (key event)
  * - tel: links         -> click_phone      (key event)
- * - data-track links   -> click_directions / click_reviews / click_language
+ * - data-track links   -> click_directions / click_reviews /
+ *                         click_write_review / click_language
  * - social profiles    -> click_social
  * - FAQ <details> open -> faq_open
  * - [data-track-view="pricing"] visible -> view_pricing (once per page)
@@ -54,7 +55,7 @@ export function ConversionTracker() {
         return;
       }
       const tracked = link.dataset.track;
-      if (tracked === "directions" || tracked === "reviews") {
+      if (tracked === "directions" || tracked === "reviews" || tracked === "write_review") {
         trackEvent(`click_${tracked}`, { cta_location });
         return;
       }
