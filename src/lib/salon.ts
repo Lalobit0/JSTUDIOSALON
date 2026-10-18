@@ -26,10 +26,6 @@ export const salon = {
       es: "Lunes a sábado: 10:00 a.m. – 6:00 p.m.",
       en: "Monday to Saturday: 10:00 a.m. – 6:00 p.m.",
     },
-    sunday: {
-      es: "Domingo: 11:00 a.m. – 3:00 p.m.",
-      en: "Sunday: 11:00 a.m. – 3:00 p.m.",
-    },
     note: {
       es: "Atención únicamente con cita previa.",
       en: "By appointment only.",
@@ -114,19 +110,21 @@ export const whatsappEventLink: Localized = {
   ),
 };
 
-export const whatsappColorLink: Localized = {
+/*
+ * Color y tratamientos no se cotizan por mensaje: el precio exacto se da en
+ * el salón después del diagnóstico, así que este mensaje agenda esa cita.
+ */
+export const whatsappDiagnosisLink: Localized = {
   es: lines(
-    "¡Hola Joaquín! Quiero cotizar un servicio de color.",
-    "• Servicio (balayage / babylights / rayitos / corrección de color / tinte): ",
-    "• Largo de mi cabello (corto / medio / largo): ",
-    "¿Qué disponibilidad tienen?",
+    "¡Hola Joaquín! Me interesa un servicio de color o tratamiento y quiero agendar una cita de diagnóstico en el salón.",
+    "• Servicio que me interesa (balayage / babylights / rayitos / corrección de color / tinte / tratamiento): ",
+    "• Día y horario que me acomoda: ",
   ),
   en: lines(
-    "Hi Joaquín! I'd like a quote for a color service.",
-    "(¡Hola! Quiero cotizar un servicio de color.)",
-    "• Service (balayage / babylights / highlights / color correction / all-over color) / Servicio: ",
-    "• Hair length (short / medium / long) / Largo del cabello: ",
-    "What availability do you have? / ¿Qué disponibilidad tienen?",
+    "Hi Joaquín! I'm interested in a color service or treatment and I'd like to book a diagnosis appointment at the salon.",
+    "(¡Hola! Me interesa un servicio de color o tratamiento y quiero agendar una cita de diagnóstico en el salón.)",
+    "• Service (balayage / babylights / highlights / color correction / all-over color / treatment) / Servicio: ",
+    "• Preferred day and time / Día y horario: ",
   ),
 };
 
@@ -579,8 +577,18 @@ export const faqs: Faq[] = [
       en: "How much will my service cost?",
     },
     a: {
-      es: "Puedes ver la lista de precios en esta página. Para servicios de color o cabello largo te damos una cotización exacta por WhatsApp, sin compromiso.",
-      en: "You can see the price list on this page. For color services or long hair, we'll send you an exact quote on WhatsApp, with no obligation.",
+      es: "La lista de esta página muestra nuestros precios para cabello corto. En color y tratamientos indica el precio desde el que inicia cada servicio: el precio exacto se da en el salón, después del diagnóstico de tu cabello. El cabello largo o muy denso también se cotiza en el salón.",
+      en: "The list on this page shows our prices for short hair. For color and treatments it shows the starting price of each service: the exact price is given at the salon, after your hair diagnosis. Long or very thick hair is also quoted at the salon.",
+    },
+  },
+  {
+    q: {
+      es: "¿Me pueden dar precio o diagnóstico de color por WhatsApp?",
+      en: "Can you give me a color price or diagnosis on WhatsApp?",
+    },
+    a: {
+      es: "En color y tratamientos no damos precios ni diagnósticos por WhatsApp, teléfono o redes sociales: sin ver tu cabello no podemos saber en qué condiciones está. Agenda una cita de diagnóstico; en el salón revisamos tu cabello, te decimos si el servicio que buscas es el adecuado y te damos el precio exacto.",
+      en: "For color and treatments we don't give prices or diagnoses over WhatsApp, phone or social media: without seeing your hair we can't know its condition. Book a diagnosis appointment; at the salon we check your hair, tell you whether the service you want is right for you and give you the exact price.",
     },
   },
   {

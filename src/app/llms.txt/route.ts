@@ -35,7 +35,8 @@ export function GET() {
 - Dirección: ${salon.address.full}
 - Teléfono: ${salon.phone.display.es} (desde EE. UU.: ${salon.phone.display.en})
 - WhatsApp (citas): ${salon.whatsapp.display.es} — ${salon.whatsapp.link}
-- Horario: ${salon.hours.weekdays.es}; ${salon.hours.sunday.es} ${salon.hours.note.es}
+- Horario: ${salon.hours.weekdays.es}. ${salon.hours.note.es}
+- Cotizaciones: color y tratamientos no se cotizan por WhatsApp, teléfono ni redes sociales; el precio exacto se da en el salón después de un diagnóstico del cabello, con cita.
 - Formas de pago: ${salon.payments.es}
 - Google Maps: ${salon.googleMapsUrl}
 
@@ -68,7 +69,7 @@ ${courses
 - [Privacy notice](${absoluteUrl(routes.privacy.en)})
 - Payment: ${salon.payments.en}
 
-## Precios (MXN, cabello corto; cabello largo se cotiza en sitio)
+## Precios (MXN, cabello corto; cabello largo se cotiza en sitio. En color y tratamientos son precios "desde": el exacto se da tras el diagnóstico en el salón)
 ${prices}
 
 ## Preguntas frecuentes

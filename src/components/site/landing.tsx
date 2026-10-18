@@ -129,7 +129,7 @@ export function LandingVisit({
           <li className="flex items-start justify-center gap-2">
             <Clock className="mt-1 size-4 shrink-0 text-gold" />
             <span>
-              {salon.hours.weekdays[lang]} · {salon.hours.sunday[lang]}
+              {salon.hours.weekdays[lang]}
               <span className="block text-sm text-gold">{salon.hours.note[lang]}</span>
             </span>
           </li>

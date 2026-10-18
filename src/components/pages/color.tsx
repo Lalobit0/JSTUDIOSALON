@@ -7,13 +7,14 @@ import { PriceCards } from "@/components/site/pricing";
 import { Faqs } from "@/components/site/faq";
 import { Highlights } from "@/components/site/studio";
 import { LandingHero, LandingVisit } from "@/components/site/landing";
+import { PriceNotice } from "@/components/site/price-notice";
 import {
   brands,
   faqsFor,
   galleryFor,
   localizeGallery,
   priceList,
-  whatsappColorLink,
+  whatsappDiagnosisLink,
 } from "@/lib/salon";
 import { routes, type Locale } from "@/lib/i18n";
 import { JsonLd, absoluteUrl, breadcrumbs, pageMetadata, salonId } from "@/lib/seo";
@@ -24,7 +25,7 @@ const copy = {
   es: {
     metaTitle: "Balayage y Corrección de Color en Tijuana | Joaquín Studio",
     metaDescription:
-      "Balayage desde $4,500, babylights y corrección de color en El Pípila, Tijuana. Mira fotos reales del salón y cotiza tu color por WhatsApp.",
+      "Balayage desde $4,500, babylights y corrección de color en El Pípila, Tijuana. Mira fotos reales del salón y agenda tu diagnóstico por WhatsApp.",
     title: "Balayage y corrección de color en Tijuana",
     home: "Inicio",
     crumb: "Balayage y color",
@@ -32,7 +33,7 @@ const copy = {
     eyebrow: "Color & Balayage",
     description:
       "Balayage, rayitos, mechas universales y babylights con técnicas Pivot Point para un color luminoso y natural. También rescatamos colores no deseados y unificamos tonos sin maltratar tu cabello.",
-    cta: "Cotizar mi color",
+    cta: "Agendar diagnóstico",
     galleryEyebrow: "Portafolio",
     galleryTitle: "Balayage, mechas y color hechos en el salón",
     galleryDescription: "Fotos reales de clientas. Toca una foto para verla en grande.",
@@ -48,7 +49,7 @@ const copy = {
   en: {
     metaTitle: "Balayage & Color Correction in Tijuana | Joaquín Studio",
     metaDescription:
-      "Balayage from $4,500 MXN, babylights and color correction in El Pípila, Tijuana, Mexico. See real salon photos and get a color quote on WhatsApp.",
+      "Balayage from $4,500 MXN, babylights and color correction in El Pípila, Tijuana, Mexico. See real salon photos and book a diagnosis on WhatsApp.",
     title: "Balayage and color correction in Tijuana",
     home: "Home",
     crumb: "Balayage and color",
@@ -56,7 +57,7 @@ const copy = {
     eyebrow: "Color & Balayage",
     description:
       "Balayage, highlights, foils and babylights with Pivot Point techniques for bright, natural-looking color. We also fix unwanted color and even out tones without damaging your hair.",
-    cta: "Get a color quote",
+    cta: "Book a diagnosis",
     galleryEyebrow: "Portfolio",
     galleryTitle: "Balayage, highlights and color done at the salon",
     galleryDescription: "Real photos of our clients. Tap a photo to see it full size.",
@@ -94,6 +95,7 @@ const prices = priceList.filter((c) => c.id === "color" || c.id === "treatments"
 
 const questions = faqsFor([
   "¿Cuánto cuesta mi servicio?",
+  "¿Me pueden dar precio o diagnóstico de color por WhatsApp?",
   "¿Atienden cabello largo?",
   "¿Qué productos utilizan?",
 ]);
@@ -101,7 +103,7 @@ const questions = faqsFor([
 export function ColorPage({ lang }: { lang: Locale }) {
   const t = copy[lang];
   const path = routes.color[lang];
-  const cta = { href: whatsappColorLink[lang], label: t.cta };
+  const cta = { href: whatsappDiagnosisLink[lang], label: t.cta };
   const structuredData = [
     breadcrumbs([
       { name: t.home, path: routes.home[lang] },
@@ -153,6 +155,7 @@ export function ColorPage({ lang }: { lang: Locale }) {
               description={t.pricesDescription}
             />
             <PriceCards categories={prices} lang={lang} className="mt-12 md:grid-cols-2" />
+            <PriceNotice lang={lang} withOtherService={false} className="mt-10" />
           </div>
         </section>
 

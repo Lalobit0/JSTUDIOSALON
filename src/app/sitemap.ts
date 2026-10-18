@@ -9,9 +9,9 @@ import { absoluteUrl } from "@/lib/seo";
  * is listed in both languages, pointing to each other (hreflang).
  */
 const pages: { route: RouteKey; lastModified: string; priority: number }[] = [
-  { route: "home", lastModified: "2026-10-11", priority: 1 },
-  { route: "bridal", lastModified: "2026-10-11", priority: 0.9 },
-  { route: "color", lastModified: "2026-10-11", priority: 0.9 },
+  { route: "home", lastModified: "2026-10-18", priority: 1 },
+  { route: "bridal", lastModified: "2026-10-18", priority: 0.9 },
+  { route: "color", lastModified: "2026-10-18", priority: 0.9 },
   { route: "privacy", lastModified: "2026-10-11", priority: 0.2 },
 ];
 

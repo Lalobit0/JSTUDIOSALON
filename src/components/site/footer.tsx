@@ -94,11 +94,7 @@ export function Footer({ lang }: { lang: Locale }) {
               </li>
               <li className="flex items-start gap-2 py-2">
                 <Clock className="mt-0.5 size-4 shrink-0 text-gold" />
-                <span>
-                  {salon.hours.weekdays[lang]}
-                  <br />
-                  {salon.hours.sunday[lang]}
-                </span>
+                <span>{salon.hours.weekdays[lang]}</span>
               </li>
               <li>
                 <a href={`tel:${salon.phone.tel}`} className={`${linkClass} gap-2`}>

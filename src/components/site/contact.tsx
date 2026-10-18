@@ -69,8 +69,6 @@ export function Contact({ lang }: { lang: Locale }) {
 
             <ContactRow icon={Clock} label={t.hours}>
               {salon.hours.weekdays[lang]}
-              <br />
-              {salon.hours.sunday[lang]}
               <span className="mt-1 block text-sm text-gold">
                 {salon.hours.note[lang]}
               </span>
