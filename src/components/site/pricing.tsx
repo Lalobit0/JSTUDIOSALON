@@ -1,16 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-import {
-  formatPrice,
-  priceList,
-  whatsappBookingLink,
-  type PriceItem,
-} from "@/lib/salon";
+import { formatPrice, priceList, type PriceItem } from "@/lib/salon";
 import { routes, type Locale, type Localized, type RouteKey } from "@/lib/i18n";
-import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
+import { PriceNotice } from "@/components/site/price-notice";
 import { cn } from "@/lib/utils";
 
 const copy = {
@@ -19,9 +14,6 @@ const copy = {
     title: "Precios de balayage, tintes, cortes y tratamientos",
     description:
       "Tarifas claras en pesos mexicanos para cabello corto. El cabello largo o de mayor densidad se cotiza durante tu valoración.",
-    question:
-      "¿Dudas sobre tu servicio o cabello largo? Escríbenos y te damos una cotización sin compromiso.",
-    cta: "Cotizar y agendar",
     photos: "Ver fotos de balayage y color",
   },
   en: {
@@ -29,9 +21,6 @@ const copy = {
     title: "Prices for balayage, color, haircuts and treatments",
     description:
       "Clear prices in Mexican pesos (MXN) for short hair. Long or thicker hair is quoted during your consultation.",
-    question:
-      "Questions about your service or long hair? Message us for a no-obligation quote.",
-    cta: "Get a quote and book",
     photos: "See balayage and color photos",
   },
 } satisfies Record<Locale, unknown>;
@@ -121,19 +110,7 @@ export function Pricing({ lang }: { lang: Locale }) {
           className="mt-16 lg:grid-cols-3"
         />
 
-        <Reveal className="mt-12 flex flex-col items-center gap-4 text-center">
-          <p className="text-sm text-muted-foreground">{t.question}</p>
-          <Button asChild size="lg">
-            <a
-              href={whatsappBookingLink[lang]}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MessageCircle />
-              {t.cta}
-            </a>
-          </Button>
-        </Reveal>
+        <PriceNotice lang={lang} className="mt-12" />
       </div>
     </section>
   );

@@ -114,12 +114,6 @@ function structuredData(lang: Locale) {
           opens: "10:00",
           closes: "18:00",
         },
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: "Sunday",
-          opens: "11:00",
-          closes: "15:00",
-        },
       ],
       sameAs: [
         salon.social.facebook,
